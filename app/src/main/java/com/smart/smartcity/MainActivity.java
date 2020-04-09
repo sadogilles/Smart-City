@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
          list.add("Actualite 3");
          list.add("Actualite 4");
          list.add("Actualite 5");
+        list.add("Actualite 5");
 
          arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,list);
         listView.setAdapter(arrayAdapter);
