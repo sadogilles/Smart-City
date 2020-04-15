@@ -6,6 +6,7 @@ import androidx.appcompat.view.menu.MenuBuilder;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -14,36 +15,40 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.smart.smartcity.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    private User user = null;
     Menu top_menu=null;
     ArrayAdapter<String> arrayAdapter=null;
     BottomNavigationView bottom_menu = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-         ListView listView = findViewById(R.id.new_list);
-         List<String> list = new ArrayList<>();
+        user = getIntent().getExtras().getParcelable(LoginActivity.USER_KEY);
 
-         list.add("Actualite 1");
-         list.add("Actualite 2");
-         list.add("Actualite 3");
-         list.add("Actualite 4");
-         list.add("Actualite 5");
+        Toast.makeText(this, "Welcome " + user.getFirstName() + " !", Toast.LENGTH_SHORT).show();
+
+        ListView listView = findViewById(R.id.new_list);
+        List<String> list = new ArrayList<>();
+
+        list.add("Actualite 1");
+        list.add("Actualite 2");
+        list.add("Actualite 3");
+        list.add("Actualite 4");
+        list.add("Actualite 5");
         list.add("Actualite 5");
 
-         arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,list);
+        arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,list);
         listView.setAdapter(arrayAdapter);
-        top_menu = (Menu)findViewById(R.id.menu);
+        top_menu = findViewById(R.id.menu);
         bottom_menu =findViewById(R.id.bottom_menu);
 
         //set the home as default
