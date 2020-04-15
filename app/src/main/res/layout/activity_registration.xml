@@ -157,32 +157,26 @@
         android:id="@+id/genderRadioGroupRegistration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_weight="1" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <RadioButton
+            android:id="@+id/maleRadioButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_marginRight="30dp"
+            android:text="@string/male_label"
+            android:buttonTint="#FFFFFF"
+            android:textColor="#FFFFFF" />
 
-            <RadioButton
-                android:id="@+id/maleRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:text="@string/male_label"
-                android:buttonTint="#FFFFFF"
-                android:textColor="#FFFFFF" />
-
-            <RadioButton
-                android:id="@+id/femaleRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/female_label"
-                android:buttonTint="#FFFFFF"
-                android:textColor="#FFFFFF"/>
-        </LinearLayout>
-
+        <RadioButton
+            android:id="@+id/femaleRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/female_label"
+            android:buttonTint="#FFFFFF"
+            android:textColor="#FFFFFF"/>
     </RadioGroup>
     <TextView
         android:id="@+id/townLabelRegistration"
