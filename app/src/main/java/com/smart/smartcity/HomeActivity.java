@@ -2,9 +2,7 @@ package com.smart.smartcity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,17 +12,23 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.smart.smartcity.adapters.ServiceAdapter;
+import com.smart.smartcity.context.IServiceListContext;
+import com.smart.smartcity.dao.ServiceDAO;
+import com.smart.smartcity.model.Service;
 import com.smart.smartcity.model.User;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements IServiceListContext {
     private User user = null;
-    Menu top_menu=null;
-    ArrayAdapter<String> arrayAdapter=null;
+    private Menu topMenu = null;
+    private ServiceAdapter serviceAdapter = null;
+    private ListView serviceListView = null;
+    private List<Service> services = new ArrayList<Service>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,19 +39,16 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Welcome " + user.getFirstName() + " !", Toast.LENGTH_SHORT).show();
 
-        ListView listView = findViewById(R.id.new_list);
-        List<String> list = new ArrayList<>();
+        ServiceDAO dao = new ServiceDAO();
+        dao.setServiceListContext(this);
 
-        list.add("Actualite 1");
-        list.add("Actualite 2");
-        list.add("Actualite 3");
-        list.add("Actualite 4");
-        list.add("Actualite 5");
-        list.add("Actualite 5");
+        dao.findServicesByUserId(user.getId());
 
-        arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,list);
-        listView.setAdapter(arrayAdapter);
-        top_menu = findViewById(R.id.menu);
+        serviceListView = findViewById(R.id.serviceListView);
+        serviceAdapter = new ServiceAdapter(this, services);
+        serviceListView.setAdapter(serviceAdapter);
+
+        topMenu = findViewById(R.id.menu);
     }
 
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 //filter here
-                arrayAdapter.getFilter().filter(newText);
+                // arrayAdapter.getFilter().filter(newText);
                 return true;
             }
         });
@@ -98,5 +99,19 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSuccess(List<Service> services) {
+        serviceAdapter.clear();
+        serviceAdapter.addAll(services);
+        serviceAdapter.notifyDataSetChanged();
+        this.services.clear();
+        this.services.addAll(services);
+    }
+
+    @Override
+    public void onGetServicesFailed() {
+        Log.e("services", "Error while collecting services from web API");
     }
 }

@@ -9,11 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.smart.smartcity.context.AuthenticationContext;
+import com.smart.smartcity.context.IAuthenticationContext;
 import com.smart.smartcity.dao.UserDAO;
 import com.smart.smartcity.model.User;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, AuthenticationContext {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, IAuthenticationContext {
     public static final String USER_KEY = "USER";
     private EditText mailAddress;
     private EditText password;
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             dao.setAuthenticationContext(this);
             dao.authentify(mailAddress.getText().toString(), password.getText().toString());
         } else if (v.getId() == R.id.signUpButton) {
-            Intent intent = new Intent(this, RegistrationActivity.class);
+            Intent intent = new Intent(this, IRegistrationActivity.class);
             startActivity(intent);
         }
     }
@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         System.out.println(user.getAddress());
         System.out.println(user.getInterests().size());
         System.out.println(user.getServices().size());
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         intent.putExtra(USER_KEY, user);
         startActivity(intent);
     }

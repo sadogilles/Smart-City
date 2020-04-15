@@ -1,10 +1,8 @@
 package com.smart.smartcity.context;
 
-import android.content.Context;
-
 import com.smart.smartcity.model.User;
 
-public interface AuthenticationContext {
+public interface IRegistrationContext {
     void onSuccess(User user);
-    void onUserNotFound();
+    void onRegistrationError();
 }

@@ -3,9 +3,9 @@ package com.smart.smartcity.dao;
 import android.util.Log;
 
 import com.smart.smartcity.apiservices.UserApiService;
-import com.smart.smartcity.context.AuthenticationContext;
+import com.smart.smartcity.context.IAuthenticationContext;
 import com.smart.smartcity.apiservices.AuthenticationApiService;
-import com.smart.smartcity.context.RegistrationContext;
+import com.smart.smartcity.context.IRegistrationContext;
 import com.smart.smartcity.model.User;
 import com.smart.smartcity.protocol.AuthenticationData;
 
@@ -18,23 +18,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class UserDAO {
     private static final String BASE_API_URL = "https://smartcityapi20200414094628.azurewebsites.net/";
     private Retrofit retrofit;
-    private AuthenticationContext authenticationContext;
-    private RegistrationContext registrationContext;
+    private IAuthenticationContext authenticationContext;
+    private IRegistrationContext registrationContext;
 
     public UserDAO() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+    }
 
+    public void setAuthenticationContext(IAuthenticationContext authenticationContext) {
         this.authenticationContext = authenticationContext;
     }
 
-    public void setAuthenticationContext(AuthenticationContext authenticationContext) {
-        this.authenticationContext = authenticationContext;
-    }
-
-    public void setRegistrationContext(RegistrationContext registrationContext) {
+    public void setRegistrationContext(IRegistrationContext registrationContext) {
         this.registrationContext = registrationContext;
     }
 
