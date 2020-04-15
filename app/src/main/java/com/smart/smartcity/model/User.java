@@ -66,11 +66,7 @@ public class User implements Parcelable {
     }
 
     private User(Parcel in) {
-        if (in.readByte() == 0) {
-            id = null;
-        } else {
-            id = in.readInt();
-        }
+        id = in.readInt();
         firstName = in.readString();
         lastName = in.readString();
         email = in.readString();
