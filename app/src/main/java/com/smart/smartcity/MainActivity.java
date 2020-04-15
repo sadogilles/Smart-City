@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private User user = null;
     Menu top_menu=null;
     ArrayAdapter<String> arrayAdapter=null;
-    BottomNavigationView bottom_menu = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,32 +48,6 @@ public class MainActivity extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,list);
         listView.setAdapter(arrayAdapter);
         top_menu = findViewById(R.id.menu);
-        bottom_menu =findViewById(R.id.bottom_menu);
-
-        //set the home as default
-        bottom_menu.setSelectedItemId(R.id.home_icon);
-
-        //add action listener
-        bottom_menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch(item.getItemId()){
-
-                    case R.id.home_icon:
-                        Toast.makeText(getApplicationContext(),"Home icon clicked",Toast.LENGTH_SHORT).show();
-                    case R.id.news_icon:
-                        Toast.makeText(getApplicationContext(),"news icon clicked",Toast.LENGTH_SHORT).show();
-                    case R.id.trade_icon:
-                        Toast.makeText(getApplicationContext(),"Trade icon Clicke",Toast.LENGTH_SHORT).show();
-                    case R.id.network_icon:
-                        Toast.makeText(getApplicationContext(),"Network Icon Clicked",Toast.LENGTH_SHORT).show();
-
-                }
-
-                return true;
-            }
-        });
     }
 
 

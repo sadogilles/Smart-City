@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/new_list"
-            />
+            >
+
+        </ListView>
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.smart.smartcity.BottomMenuFragment"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottom_menu"
-
-        app:itemBackground="@color/colorPrimary"
-        app:itemTextColor="@drawable/item_selector"
-        app:itemIconTint="@drawable/item_selector"
-        app:menu="@menu/bottom_menu"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-
-        />
 </RelativeLayout>
 
