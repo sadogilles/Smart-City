@@ -1,4 +1,4 @@
-package com.smart.smartcity;
+package com.smart.smartcity.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.smart.smartcity.R;
 import com.smart.smartcity.context.IAuthenticationContext;
 import com.smart.smartcity.dao.UserDAO;
 import com.smart.smartcity.model.User;
@@ -61,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         System.out.println(user.getAddress());
         System.out.println(user.getInterests().size());
         System.out.println(user.getServices().size());
-        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra(USER_KEY, user);
         startActivity(intent);
     }

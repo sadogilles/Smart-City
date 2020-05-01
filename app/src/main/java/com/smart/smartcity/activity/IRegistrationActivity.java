@@ -1,4 +1,4 @@
-package com.smart.smartcity;
+package com.smart.smartcity.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.smart.smartcity.R;
 import com.smart.smartcity.context.IRegistrationContext;
 import com.smart.smartcity.dao.UserDAO;
 import com.smart.smartcity.model.User;
