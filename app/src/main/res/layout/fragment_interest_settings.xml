@@ -6,6 +6,14 @@
     tools:context=".fragment.InterestSettingsFragment"
     android:orientation="vertical"
     >
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="40dp"
+        android:text="Modify your Interest settings"
+        android:textSize="20dp"
+        />
 
     <ListView
         android:id="@+id/profile_interest_list"

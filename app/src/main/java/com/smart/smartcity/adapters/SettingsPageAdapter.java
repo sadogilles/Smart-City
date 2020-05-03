@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.smart.smartcity.AlarmSettingsFragment;
 import com.smart.smartcity.R;
 import com.smart.smartcity.fragment.InterestSettingsFragment;
 import com.smart.smartcity.fragment.ProfileSettingsFragment;
@@ -24,7 +25,7 @@ public class SettingsPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     @NonNull
@@ -37,6 +38,8 @@ public class SettingsPageAdapter extends FragmentPagerAdapter {
                 return InterestSettingsFragment.newInstance();
             case 2:
                 return ServiceSettingsFragment.newInstance();
+            case 3:
+                return AlarmSettingsFragment.newInstance();
             default:
                 return null;
 
@@ -54,6 +57,8 @@ public class SettingsPageAdapter extends FragmentPagerAdapter {
                 return "Interest";
             case 2:
                 return "Service";
+            case 3:
+                return "Alarm";
             default:
                 return null;
         }
