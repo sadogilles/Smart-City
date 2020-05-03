@@ -27,4 +27,21 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="service_list_title">My actuality</string>
+
+    <!--    this correspond to profile settings -->
+    <string name="profile_settings">Profile </string>
+
+
+    <string name="interest_settings">Interest </string>
+    <string name="user_last_name">Last Name</string>
+    <string name="user_first_name">First Name</string>
+    <string name="user_email">Email</string>
+    <string name="user_first_name_hint">First Name</string>
+    <string name="user_last_name_hint">Last Name</string>
+    <string name="user_email_hint">Email</string>
+    <string name="user_password_hint">Password</string>
+    <string name="user_town_hint">Town</string>
+    <string name="user_address_hint">Address</string>
+    <string name="user_profile_submit_button_text">Submit</string>
+    <string name="interest_settings_submit_button">Save</string>
 </resources>

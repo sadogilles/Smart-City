@@ -3,6 +3,8 @@ package com.smart.smartcity.activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -10,21 +12,26 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.smart.smartcity.R;
 import com.smart.smartcity.adapters.ServiceAdapter;
 import com.smart.smartcity.fragment.BottomMenuFragment;
 import com.smart.smartcity.fragment.HomeFragment;
+import com.smart.smartcity.fragment.InterestSettingsFragment;
 import com.smart.smartcity.fragment.NetworkFragment;
 import com.smart.smartcity.fragment.NewsFragment;
+import com.smart.smartcity.fragment.ProfileSettingsFragment;
+import com.smart.smartcity.adapters.SettingsPageAdapter;
+import com.smart.smartcity.fragment.SettingsFragment;
 import com.smart.smartcity.fragment.TradeFragment;
 import com.smart.smartcity.model.Service;
 import com.smart.smartcity.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
+import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity implements BottomMenuFragment.OnBottomMenuItemClickedListener{ // implements ,IServiceListContext
@@ -40,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     private NewsFragment newsFragment = null;
     private HomeFragment homeFragment = null;
     private TradeFragment tradeFragment = null;
+    private SettingsFragment settingsFragment = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
                 Toast.makeText(this,"Help Clicked",Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.settings_icon:
-                Toast.makeText(this,"Settings clicked",Toast.LENGTH_SHORT).show();
+                this.configureAndShowSettingsFragment();
 
 
             default:
@@ -198,6 +207,16 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
 
     }
 
+    private void configureAndShowSettingsFragment() {
+
+        if(this.settingsFragment==null) {
+            this.settingsFragment = SettingsFragment.newInstance();
+            this.startFragmentTransaction(settingsFragment);
+            System.out.println("settings clicked");
+            settingsFragment=null;
+        }
+
+    }
 
     public void startFragmentTransaction(Fragment fragment){
 
@@ -206,4 +225,6 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
         }
 
     }
+
+
 }
