@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.smart.smartcity.R;
 import com.smart.smartcity.activity.LoginActivity;
+import com.smart.smartcity.activity.MainActivity;
 import com.smart.smartcity.model.User;
 
 /**
@@ -45,5 +46,12 @@ public class NetworkFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_network, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ((MainActivity) getActivity()).updateBottomMenu(R.id.network_icon);
     }
 }

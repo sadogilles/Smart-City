@@ -1,5 +1,6 @@
 package com.smart.smartcity.fragment;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -40,8 +41,6 @@ public class NewsFragment extends Fragment implements IServiceListContext, IDown
     public NewsFragment() {
         // Required empty public constructor
     }
-
-
 
     public static NewsFragment newInstance(User user) {
         NewsFragment fragment = new NewsFragment();
@@ -100,9 +99,16 @@ public class NewsFragment extends Fragment implements IServiceListContext, IDown
 
     @Override
     public void onImageDownloaded(Bitmap bitmap, int id) {
-        System.out.println("services : " + services.size());
+        System.out.println("Downloaded " + id + " !");
         Service service = (Service) serviceAdapter.getItem(id);
         service.setImageBitmap(bitmap);
         serviceAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ((MainActivity) getActivity()).updateBottomMenu(R.id.news_icon);
     }
 }

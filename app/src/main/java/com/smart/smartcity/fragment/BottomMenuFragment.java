@@ -70,13 +70,8 @@ public class BottomMenuFragment extends Fragment implements BottomNavigationView
        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_bottom_menu, container, false);
 
-
-        view.findViewById(R.id.bottom_menu);
-
         bottomMenu = view.findViewById(R.id.bottom_menu);
 
-
-        //set the home as default
         bottomMenu.setSelectedItemId(R.id.news_icon);
 
         //redirect listener to class listener

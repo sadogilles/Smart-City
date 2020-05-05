@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.smart.smartcity.R;
 import com.smart.smartcity.adapters.ServiceAdapter;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     private TradeFragment tradeFragment = null;
     private SettingsFragment settingsFragment = null;
     private CurrentFragment currentFragment = CurrentFragment.NONE;
+    private BottomNavigationView bottomMenuView;
 
 
     @Override
@@ -65,8 +67,9 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
         Toast.makeText(this, "Welcome " + user.getFirstName() + " !", Toast.LENGTH_SHORT).show();
 
         topMenu = findViewById(R.id.menu);
+        bottomMenuView = findViewById(R.id.bottom_menu);
 
-        showNewsFragment();
+        showNewsFragment(true);
     }
 
 
@@ -125,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
        //show fragment corresponding to the bottom menu item clicked
         switch(item.getItemId()){
             case R.id.news_icon:
-               this.showNewsFragment();
+               this.showNewsFragment(false);
                break;
             case R.id.trade_icon:
                 this.showTradeFragment();
@@ -139,11 +142,14 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
 
     }
 
-    private void showNewsFragment() {
+    private void showNewsFragment(boolean initial) {
         if (currentFragment != NEWS) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             newsFragment = NewsFragment.newInstance(user);
             transaction.replace(R.id.main_fragment, newsFragment);
+            if (! initial) {
+                transaction.addToBackStack(null);
+            }
             currentFragment = NEWS;
             transaction.commit();
         }
@@ -154,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             tradeFragment = TradeFragment.newInstance(user);
             transaction.replace(R.id.main_fragment, tradeFragment);
+            transaction.addToBackStack(null);
             transaction.commit();
             currentFragment = CurrentFragment.TRADES;
         }
@@ -164,6 +171,7 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             networkFragment = NetworkFragment.newInstance(user);
             transaction.replace(R.id.main_fragment, networkFragment);
+            transaction.addToBackStack(null);
             transaction.commit();
             currentFragment = CurrentFragment.NETWORKS;
         }
@@ -174,8 +182,13 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             settingsFragment = SettingsFragment.newInstance(user);
             transaction.replace(R.id.main_fragment, settingsFragment);
+            transaction.addToBackStack(null);
             transaction.commit();
             currentFragment = CurrentFragment.SETTINGS;
         }
+    }
+
+    public void updateBottomMenu(int icon) {
+        bottomMenuView.setSelectedItemId(icon);
     }
 }
