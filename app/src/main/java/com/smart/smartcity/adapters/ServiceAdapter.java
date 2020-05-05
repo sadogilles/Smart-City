@@ -46,7 +46,10 @@ public class ServiceAdapter extends ArrayAdapter<Service> {
         Service data = (Service) getItem(position);
 
         viewHolder.serviceNameText.setText(data.getName());
-        new DownloadImageTask(viewHolder.serviceImage).execute(data.getImageUrl());
+
+        if (data.getImageBitmap() != null) {
+            viewHolder.serviceImage.setImageBitmap(data.getImageBitmap());
+        }
 
         return view;
     }

@@ -1,6 +1,7 @@
 package com.smart.smartcity.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,11 +13,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.smart.smartcity.R;
 import com.smart.smartcity.adapters.ServiceAdapter;
+import com.smart.smartcity.context.IServiceListContext;
+import com.smart.smartcity.dao.ServiceDAO;
 import com.smart.smartcity.fragment.BottomMenuFragment;
 import com.smart.smartcity.fragment.HomeFragment;
 import com.smart.smartcity.fragment.InterestSettingsFragment;
@@ -28,19 +33,19 @@ import com.smart.smartcity.fragment.SettingsFragment;
 import com.smart.smartcity.fragment.TradeFragment;
 import com.smart.smartcity.model.Service;
 import com.smart.smartcity.model.User;
+import com.smart.smartcity.util.CurrentFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static com.smart.smartcity.util.CurrentFragment.NEWS;
 
-public class MainActivity extends AppCompatActivity implements BottomMenuFragment.OnBottomMenuItemClickedListener{ // implements ,IServiceListContext
+
+public class MainActivity extends AppCompatActivity implements BottomMenuFragment.OnBottomMenuItemClickedListener {
 
     private User user = null;
     private Menu topMenu = null;
-    private ServiceAdapter serviceAdapter = null;
-    private ListView serviceListView = null;
-    private List<Service> services = new ArrayList<Service>();
 
     //fragments
     private NetworkFragment networkFragment = null;
@@ -48,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     private HomeFragment homeFragment = null;
     private TradeFragment tradeFragment = null;
     private SettingsFragment settingsFragment = null;
+    private CurrentFragment currentFragment = CurrentFragment.NONE;
+    private BottomNavigationView bottomMenuView;
 
 
     @Override
@@ -59,16 +66,10 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
 
         Toast.makeText(this, "Welcome " + user.getFirstName() + " !", Toast.LENGTH_SHORT).show();
 
-        //ServiceDAO dao = new ServiceDAO();
-       // dao.setServiceListContext(this);
-
-     //   dao.findServicesByUserId(user.getId());
-
-        //serviceListView = findViewById(R.id.serviceListView);
-       // serviceAdapter = new ServiceAdapter(this, services);
-       // serviceListView.setAdapter(serviceAdapter);
-
         topMenu = findViewById(R.id.menu);
+        bottomMenuView = findViewById(R.id.bottom_menu);
+
+        showNewsFragment(true);
     }
 
 
@@ -121,30 +122,13 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
         return super.onOptionsItemSelected(item);
     }
 
-//    @Override
-//    public void onSuccess(List<Service> services) {
-//        serviceAdapter.clear();
-//        serviceAdapter.addAll(services);
-//        serviceAdapter.notifyDataSetChanged();
-//        this.services.clear();
-//        this.services.addAll(services);
-//    }
-
-//    @Override
-//    public void onGetServicesFailed() {
-//        Log.e("services", "Error while collecting services from web API");
-//    }
-
     @Override
     public void onBottomMenuItemClicked(MenuItem item) {
 
        //show fragment corresponding to the bottom menu item clicked
         switch(item.getItemId()){
-            case R.id.home_icon:
-                this.showHomeFragment();
-                break;
             case R.id.news_icon:
-               this.showNewsFragment();
+               this.showNewsFragment(false);
                break;
             case R.id.trade_icon:
                 this.showTradeFragment();
@@ -158,73 +142,53 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
 
     }
 
-    private void showNewsFragment() {
-
-        if(this.newsFragment==null) {
-            this.newsFragment = NewsFragment.newInstance();
-            this.startFragmentTransaction(this.newsFragment);
-
-            System.out.println("news clicked");
-
-            this.newsFragment=null;
+    private void showNewsFragment(boolean initial) {
+        if (currentFragment != NEWS) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            newsFragment = NewsFragment.newInstance(user);
+            transaction.replace(R.id.main_fragment, newsFragment);
+            if (! initial) {
+                transaction.addToBackStack(null);
+            }
+            currentFragment = NEWS;
+            transaction.commit();
         }
-
     }
 
     private void showTradeFragment() {
-
-        if(this.tradeFragment==null) {
-            this.tradeFragment = tradeFragment.newInstance();
-            this.startFragmentTransaction(this.tradeFragment);
-
-            System.out.println("trade clicked");
-
-            tradeFragment=null;
+        if(currentFragment != CurrentFragment.TRADES) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            tradeFragment = TradeFragment.newInstance(user);
+            transaction.replace(R.id.main_fragment, tradeFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+            currentFragment = CurrentFragment.TRADES;
         }
-        
     }
 
     private void showNetworkFragment() {
-
-        if(this.networkFragment==null) {
-            this.networkFragment = networkFragment.newInstance();
-            this.startFragmentTransaction(this.networkFragment);
-
-            System.out.println("network clicked");
-
-            this.networkFragment=null;
+        if(currentFragment != CurrentFragment.NETWORKS) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            networkFragment = NetworkFragment.newInstance(user);
+            transaction.replace(R.id.main_fragment, networkFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+            currentFragment = CurrentFragment.NETWORKS;
         }
-    }
-
-    private void showHomeFragment() {
-        if(this.homeFragment==null) {
-            this.homeFragment = homeFragment.newInstance();
-            this.startFragmentTransaction(this.homeFragment);
-
-            System.out.println("home clicked");
-            homeFragment=null;
-        }
-
     }
 
     private void configureAndShowSettingsFragment() {
-
-        if(this.settingsFragment==null) {
-            this.settingsFragment = SettingsFragment.newInstance();
-            this.startFragmentTransaction(settingsFragment);
-            System.out.println("settings clicked");
-            settingsFragment=null;
+        if(currentFragment != CurrentFragment.SETTINGS) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            settingsFragment = SettingsFragment.newInstance(user);
+            transaction.replace(R.id.main_fragment, settingsFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+            currentFragment = CurrentFragment.SETTINGS;
         }
-
     }
 
-    public void startFragmentTransaction(Fragment fragment){
-
-        if(!fragment.isVisible()){
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment,fragment).commit();
-        }
-
+    public void updateBottomMenu(int icon) {
+        bottomMenuView.setSelectedItemId(icon);
     }
-
-
 }

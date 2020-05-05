@@ -10,11 +10,15 @@ import com.smart.smartcity.fragment.AlarmSettingsFragment;
 import com.smart.smartcity.fragment.InterestSettingsFragment;
 import com.smart.smartcity.fragment.ProfileSettingsFragment;
 import com.smart.smartcity.fragment.ServiceSettingsFragment;
+import com.smart.smartcity.model.User;
 
 public class SettingsPageAdapter extends FragmentPagerAdapter {
+    private User user;
 
-    public SettingsPageAdapter(@NonNull FragmentManager fm) {
+    public SettingsPageAdapter(@NonNull FragmentManager fm, User user) {
         super(fm);
+
+        this.user = user;
     }
 
     @Override
@@ -27,7 +31,7 @@ public class SettingsPageAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position){
             case 0:
-                return  ProfileSettingsFragment.newInstance();
+                return  ProfileSettingsFragment.newInstance(user);
             case 1:
                 return InterestSettingsFragment.newInstance();
             case 2:

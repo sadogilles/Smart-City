@@ -10,7 +10,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/settings_tab"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         />
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/settings_pager"

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:id="@+id/home_icon"
-        android:title="Dashboard"
-        android:icon="@drawable/home_icon"/>
     <item android:id="@+id/news_icon"
         android:title="news"
         android:icon="@drawable/news_icon"/>

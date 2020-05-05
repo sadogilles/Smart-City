@@ -6,16 +6,20 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.smart.smartcity.context.IDownloadImageContext;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-    public ImageView imageView;
+    public IDownloadImageContext context;
+    private int id;
 
-    public DownloadImageTask(ImageView imageView) {
-        this.imageView = imageView;
+    public DownloadImageTask(IDownloadImageContext context, int id) {
+        this.context = context;
+        this.id = id;
     }
 
     @Override
@@ -36,6 +40,6 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
     @Override
     protected void onPostExecute(Bitmap result) {
-        imageView.setImageBitmap(result);
+        context.onImageDownloaded(result, id);
     }
 }
