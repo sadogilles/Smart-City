@@ -77,7 +77,7 @@ public class BottomMenuFragment extends Fragment implements BottomNavigationView
 
 
         //set the home as default
-        bottomMenu.setSelectedItemId(R.id.home_icon);
+        bottomMenu.setSelectedItemId(R.id.news_icon);
 
         //redirect listener to class listener
         bottomMenu.setOnNavigationItemSelectedListener(this);

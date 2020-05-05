@@ -10,11 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.smart.smartcity.R;
 import com.smart.smartcity.model.Interest;
-import com.smart.smartcity.model.Service;
 
 import java.util.List;
 
@@ -49,7 +47,7 @@ public class InterestSettingsAdapter extends ArrayAdapter<Interest>{
 
         Interest interest = (Interest) getItem(position);
 
-        viewHolder.interestText.setText(interest.getInterestName());
+        viewHolder.interestText.setText(interest.getName());
 
         return view;
     }

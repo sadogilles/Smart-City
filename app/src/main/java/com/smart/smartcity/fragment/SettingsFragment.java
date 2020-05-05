@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
 import com.smart.smartcity.R;
+import com.smart.smartcity.activity.LoginActivity;
 import com.smart.smartcity.adapters.SettingsPageAdapter;
+import com.smart.smartcity.model.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,8 +24,11 @@ import com.smart.smartcity.adapters.SettingsPageAdapter;
  */
 public class SettingsFragment extends Fragment {
 
-    public static SettingsFragment newInstance() {
+    public static SettingsFragment newInstance(User user) {
         SettingsFragment fragment = new SettingsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(LoginActivity.USER_KEY, user);
+        fragment.setArguments(bundle);
 
         return fragment;
     }
@@ -48,7 +53,9 @@ public class SettingsFragment extends Fragment {
         TabLayout tabs = view.findViewById(R.id.settings_tab);
         ViewPager pager = view.findViewById(R.id.settings_pager);
 
-        pager.setAdapter(new SettingsPageAdapter(getChildFragmentManager()));
+        User user = getArguments().getParcelable(LoginActivity.USER_KEY);
+
+        pager.setAdapter(new SettingsPageAdapter(getChildFragmentManager(), user));
 
         tabs.setupWithViewPager(pager);
         tabs.setTabMode(TabLayout.MODE_FIXED);

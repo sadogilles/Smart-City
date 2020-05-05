@@ -5,6 +5,7 @@ import android.util.Log;
 import com.smart.smartcity.apiservices.UserApiService;
 import com.smart.smartcity.context.IAuthenticationContext;
 import com.smart.smartcity.apiservices.AuthenticationApiService;
+import com.smart.smartcity.context.IProfileUpdateContext;
 import com.smart.smartcity.context.IRegistrationContext;
 import com.smart.smartcity.model.User;
 import com.smart.smartcity.protocol.AuthenticationData;
@@ -20,6 +21,7 @@ public class UserDAO {
     private Retrofit retrofit;
     private IAuthenticationContext authenticationContext;
     private IRegistrationContext registrationContext;
+    private IProfileUpdateContext profileUpdateContext;
 
     public UserDAO() {
         retrofit = new Retrofit.Builder()
@@ -36,6 +38,11 @@ public class UserDAO {
         this.registrationContext = registrationContext;
     }
 
+    public void setProfileUpdateContextContext(IProfileUpdateContext profileUpdateContext) {
+        this.profileUpdateContext = profileUpdateContext;
+    }
+
+    // TODO : Check if context defined
     public void authentify(String mailAddress, String password) {
         AuthenticationApiService apiService = retrofit.create(AuthenticationApiService.class);
         AuthenticationData data = new AuthenticationData();
@@ -47,9 +54,13 @@ public class UserDAO {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    authenticationContext.onSuccess(response.body());
+                    if (authenticationContext != null) {
+                        authenticationContext.onSuccess(response.body());
+                    }
                 } else {
-                    authenticationContext.onUserNotFound();
+                    if (authenticationContext != null) {
+                        authenticationContext.onUserNotFound();
+                    }
                 }
             }
 
@@ -68,9 +79,40 @@ public class UserDAO {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    registrationContext.onSuccess(user);
+                    if (registrationContext != null) {
+                        registrationContext.onSuccess(user);
+                    }
                 } else {
+                    if (registrationContext != null) {
+                        registrationContext.onRegistrationError();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                if (registrationContext != null) {
                     registrationContext.onRegistrationError();
+                }
+            }
+        });
+    }
+
+    public void update(User user) {
+        UserApiService apiService = retrofit.create(UserApiService.class);
+
+        Call<User> call = apiService.update(user.getId(), user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    if (profileUpdateContext != null) {
+                        profileUpdateContext.onUpdateSuccessful(user);
+                    }
+                } else {
+                    if (profileUpdateContext != null) {
+                        profileUpdateContext.onUpdateFailure();
+                    }
                 }
             }
 

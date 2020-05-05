@@ -1,5 +1,7 @@
 package com.smart.smartcity.model;
 
+import android.graphics.Bitmap;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -23,6 +25,8 @@ public class Service {
     @Expose
     @SerializedName("description")
     private String description;
+
+    private Bitmap imageBitmap = null;
 
     public int getId() {
         return id;
@@ -62,5 +66,13 @@ public class Service {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Bitmap getImageBitmap() {
+        return imageBitmap;
+    }
+
+    public void setImageBitmap(Bitmap imageBitmap) {
+        this.imageBitmap = imageBitmap;
     }
 }
