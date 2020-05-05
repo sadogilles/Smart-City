@@ -10,22 +10,21 @@ import android.view.ViewGroup;
 
 import com.smart.smartcity.R;
 
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ServiceSettingsFragment#newInstance} factory method to
+ * Use the {@link CreateNetworkSettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ServiceSettingsFragment extends Fragment {
+public class CreateNetworkSettingsFragment extends Fragment {
 
-    public ServiceSettingsFragment() {
+
+    public CreateNetworkSettingsFragment() {
         // Required empty public constructor
     }
 
-
     // TODO: Rename and change types and number of parameters
-    public static ServiceSettingsFragment newInstance() {
-        ServiceSettingsFragment fragment = new ServiceSettingsFragment();
+    public static CreateNetworkSettingsFragment newInstance() {
+        CreateNetworkSettingsFragment fragment = new CreateNetworkSettingsFragment();
 
         return fragment;
     }
@@ -40,8 +39,6 @@ public class ServiceSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_service_settings, container, false);
-
-
+        return inflater.inflate(R.layout.fragment_create_network_settings, container, false);
     }
 }
