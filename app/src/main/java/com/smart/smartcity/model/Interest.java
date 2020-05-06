@@ -14,10 +14,6 @@ public class Interest {
     @SerializedName("name")
     private String name;
 
-    @Expose
-    @SerializedName("children")
-    private List<Integer> childrens;
-
     public int getId() {
         return id;
     }
@@ -32,13 +28,5 @@ public class Interest {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Integer> getChildrens() {
-        return childrens;
-    }
-
-    public void setChildrens(List<Integer> childrens) {
-        this.childrens = childrens;
     }
 }

@@ -15,12 +15,19 @@
         android:textSize="20dp"
         />
 
+    <TextView
+        android:id="@+id/interest_settings_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
     <ListView
-        android:id="@+id/profile_interest_list"
+        android:id="@+id/interest_settings_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
+        android:id="@+id/update_interest_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/interest_settings_submit_button"

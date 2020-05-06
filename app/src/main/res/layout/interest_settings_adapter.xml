@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp">
+    <TextView
+        android:id="@+id/interest_name"
+        android:layout_width="wrap_content"
+        android:layout_weight="10"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:textSize="20dp"
+        android:text="Interest" />
+    <Switch
+        android:id="@+id/interest_switch"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:text="" />
+</LinearLayout>

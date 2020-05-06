@@ -123,7 +123,6 @@ public class ServiceSettingsFragment extends Fragment implements IServiceListCon
             UserDAO dao = new UserDAO();
             dao.setProfileUpdateContextContext(this);
             dao.update(user);
-            System.out.println(((MainActivity) getActivity()).getUser().getServices().size());
         }
     }
 
