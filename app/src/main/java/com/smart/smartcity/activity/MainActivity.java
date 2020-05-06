@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     private void showNewsFragment(boolean initial) {
         if (currentFragment != NEWS) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            newsFragment = NewsFragment.newInstance(user);
+            newsFragment = NewsFragment.newInstance();
             transaction.replace(R.id.main_fragment, newsFragment);
             if (! initial) {
                 transaction.addToBackStack(null);
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     private void showTradeFragment() {
         if(currentFragment != CurrentFragment.TRADES) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            tradeFragment = TradeFragment.newInstance(user);
+            tradeFragment = TradeFragment.newInstance();
             transaction.replace(R.id.main_fragment, tradeFragment);
             transaction.addToBackStack(null);
             transaction.commit();
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     private void showNetworkFragment() {
         if(currentFragment != CurrentFragment.NETWORKS) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            networkFragment = NetworkFragment.newInstance(user);
+            networkFragment = NetworkFragment.newInstance();
             transaction.replace(R.id.main_fragment, networkFragment);
             transaction.addToBackStack(null);
             transaction.commit();
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     private void configureAndShowSettingsFragment() {
         if(currentFragment != CurrentFragment.SETTINGS) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            settingsFragment = SettingsFragment.newInstance(user);
+            settingsFragment = SettingsFragment.newInstance();
             transaction.replace(R.id.main_fragment, settingsFragment);
             transaction.addToBackStack(null);
             transaction.commit();
@@ -190,5 +190,9 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
 
     public void updateBottomMenu(int icon) {
         bottomMenuView.setSelectedItemId(icon);
+    }
+
+    public User getUser() {
+        return user;
     }
 }

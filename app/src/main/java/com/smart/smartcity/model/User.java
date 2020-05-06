@@ -3,13 +3,15 @@ package com.smart.smartcity.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Parcelable {
+public class User implements Parcelable, Cloneable {
     @Expose
     @SerializedName("id")
     private Integer id;
@@ -165,6 +167,32 @@ public class User implements Parcelable {
 
     public void setServices(ArrayList<Integer> services) {
         this.services = services;
+    }
+
+    public boolean isServiceActivated(int id) {
+        return services.contains(id);
+    }
+
+    public void activateService(int id) {
+        if (! isServiceActivated(id)) {
+            services.add(id);
+        }
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        User userClone = (User) super.clone();
+
+        userClone.services = (ArrayList<Integer>) services.clone();
+        userClone.interests = (ArrayList<Integer>) interests.clone();
+
+        return userClone;
+    }
+
+    public void desactivateService(int id) {
+        if (isServiceActivated(id)) {
+            services.remove(new Integer(id));
+        }
     }
 
     @Override

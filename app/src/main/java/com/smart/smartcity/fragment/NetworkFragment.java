@@ -26,11 +26,8 @@ public class NetworkFragment extends Fragment {
     }
 
 
-    public static NetworkFragment newInstance(User user) {
+    public static NetworkFragment newInstance() {
         NetworkFragment fragment = new NetworkFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(LoginActivity.USER_KEY, user);
-        fragment.setArguments(bundle);
 
         return fragment;
     }

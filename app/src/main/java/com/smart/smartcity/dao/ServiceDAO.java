@@ -53,4 +53,25 @@ public class ServiceDAO {
             }
         });
     }
+
+    public void findServices() {
+        ServiceApiService apiService = retrofit.create(ServiceApiService.class);
+
+        Call<List<Service>> call = apiService.findServices();
+        call.enqueue(new Callback<List<Service>>() {
+            @Override
+            public void onResponse(Call<List<Service>> call, Response<List<Service>> response) {
+                if (response.isSuccessful()) {
+                    serviceListContext.onSuccess(response.body());
+                } else {
+                    serviceListContext.onGetServicesFailed();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Service>> call, Throwable t) {
+                Log.e("services", "Error while sending request to authentication API");
+            }
+        });
+    }
 }

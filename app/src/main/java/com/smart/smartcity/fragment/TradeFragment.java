@@ -26,11 +26,8 @@ public class TradeFragment extends Fragment {
     }
 
 
-    public static TradeFragment newInstance(User user) {
+    public static TradeFragment newInstance() {
         TradeFragment fragment = new TradeFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(LoginActivity.USER_KEY, user);
-        fragment.setArguments(bundle);
 
         return fragment;
     }

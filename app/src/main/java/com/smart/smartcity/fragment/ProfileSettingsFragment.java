@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.smart.smartcity.R;
 import com.smart.smartcity.activity.LoginActivity;
+import com.smart.smartcity.activity.MainActivity;
 import com.smart.smartcity.context.IProfileUpdateContext;
 import com.smart.smartcity.dao.UserDAO;
 import com.smart.smartcity.model.User;
@@ -40,12 +41,8 @@ public class ProfileSettingsFragment extends Fragment implements View.OnClickLis
         // Required empty public constructor
     }
 
-    public static ProfileSettingsFragment newInstance(User user) {
+    public static ProfileSettingsFragment newInstance() {
         ProfileSettingsFragment fragment = new ProfileSettingsFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(LoginActivity.USER_KEY, user);
-        fragment.setArguments(bundle);
 
         return fragment;
     }
@@ -62,7 +59,7 @@ public class ProfileSettingsFragment extends Fragment implements View.OnClickLis
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile_settings, container, false);
 
-        user = getArguments().getParcelable(LoginActivity.USER_KEY);
+        user = ((MainActivity) getActivity()).getUser();
 
         // TODO : Normalize naming convention ids
         firstNameField = view.findViewById(R.id.user_first_name);

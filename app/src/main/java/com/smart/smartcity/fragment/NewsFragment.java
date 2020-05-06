@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.smart.smartcity.R;
 import com.smart.smartcity.activity.LoginActivity;
@@ -35,18 +36,17 @@ public class NewsFragment extends Fragment implements IServiceListContext, IDown
 
     private ServiceAdapter serviceAdapter = null;
     private ListView serviceListView = null;
+    //TODO: Remove?
     private List<Service> services = new ArrayList<Service>();
     private User user = null;
+    private TextView noServiceActivatedStatus;
 
     public NewsFragment() {
         // Required empty public constructor
     }
 
-    public static NewsFragment newInstance(User user) {
+    public static NewsFragment newInstance() {
         NewsFragment fragment = new NewsFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(LoginActivity.USER_KEY, user);
-        fragment.setArguments(bundle);
 
         return fragment;
     }
@@ -63,7 +63,7 @@ public class NewsFragment extends Fragment implements IServiceListContext, IDown
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-        user = getArguments().getParcelable(LoginActivity.USER_KEY);
+        User user = ((MainActivity) getActivity()).getUser();
 
         ServiceDAO dao = new ServiceDAO();
         dao.setServiceListContext(this);
@@ -73,6 +73,7 @@ public class NewsFragment extends Fragment implements IServiceListContext, IDown
         serviceListView = view.findViewById(R.id.serviceListView);
         serviceAdapter = new ServiceAdapter(getActivity().getApplicationContext(), services);
         serviceListView.setAdapter(serviceAdapter);
+        noServiceActivatedStatus = view.findViewById(R.id.noServiceActivatedStatus);
 
 
         return view;
@@ -80,6 +81,12 @@ public class NewsFragment extends Fragment implements IServiceListContext, IDown
 
     @Override
     public void onSuccess(List<Service> services) {
+        if (services.isEmpty()) {
+            noServiceActivatedStatus.setVisibility(View.VISIBLE);
+        } else {
+            noServiceActivatedStatus.setVisibility(View.GONE);
+        }
+
         this.services.clear();
         this.services.addAll(services);
         serviceAdapter.clear();
@@ -93,16 +100,25 @@ public class NewsFragment extends Fragment implements IServiceListContext, IDown
 
     @Override
     public void onGetServicesFailed() {
-        System.out.println("services : failed");
         Log.e("services", "Error while collecting services from web API");
     }
 
     @Override
     public void onImageDownloaded(Bitmap bitmap, int id) {
         System.out.println("Downloaded " + id + " !");
-        Service service = (Service) serviceAdapter.getItem(id);
-        service.setImageBitmap(bitmap);
-        serviceAdapter.notifyDataSetChanged();
+
+        Service service = null;
+
+        for (Service s : services) {
+            if (s.getId() == id) {
+                service = s;
+            }
+        }
+
+        if (service != null) {
+            service.setImageBitmap(bitmap);
+            serviceAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

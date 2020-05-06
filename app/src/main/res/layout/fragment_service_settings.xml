@@ -5,25 +5,39 @@
     android:layout_height="match_parent"
     tools:context=".fragment.ServiceSettingsFragment">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="40dp"
-        android:text="Modify your Service Settings"
-        android:textSize="20dp"
-        />
-    <ListView
-        android:id="@+id/profile_service__list"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/interest_settings_submit_button"
-        style="@style/Widget.MaterialComponents.Button"
-        android:textSize="15sp"
-        />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="40dp"
+            android:text="Modify your Service Settings"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/serviceSettingsStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <ListView
+            android:id="@+id/service_settings_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+        </ListView>
+
+        <Button
+            android:id="@+id/update_service_settings_btn"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/interest_settings_submit_button"
+            android:textSize="15sp" />
+    </LinearLayout>
 
 </FrameLayout>

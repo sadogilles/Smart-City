@@ -44,4 +44,5 @@
     <string name="user_address_hint">Address</string>
     <string name="user_profile_submit_button_text">Submit</string>
     <string name="interest_settings_submit_button">Save</string>
+    <string name="no_service_activated_status">No services activated. You can activate services in the tab \'services\' in settings menu.</string>
 </resources>
