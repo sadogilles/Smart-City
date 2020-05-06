@@ -45,4 +45,7 @@
     <string name="user_profile_submit_button_text">Submit</string>
     <string name="interest_settings_submit_button">Save</string>
     <string name="no_service_activated_status">No services activated. You can activate services in the tab \'services\' in settings menu.</string>
+    <string name="create_network_name">Network Name</string>
+    <string name="create_network_description">Description</string>
+    <string name="submit">Submit</string>
 </resources>
