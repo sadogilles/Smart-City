@@ -1,4 +1,4 @@
-package com.smart.smartcity;
+package com.smart.smartcity.fragment;
 
 import android.os.Bundle;
 
@@ -8,23 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.smart.smartcity.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AlarmSettingsFragment#newInstance} factory method to
+ * Use the {@link CreateNetworkSettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AlarmSettingsFragment extends Fragment {
+public class CreateNetworkSettingsFragment extends Fragment {
 
 
-    public AlarmSettingsFragment() {
+    public CreateNetworkSettingsFragment() {
         // Required empty public constructor
     }
 
-
     // TODO: Rename and change types and number of parameters
-    public static AlarmSettingsFragment newInstance() {
-        AlarmSettingsFragment fragment = new AlarmSettingsFragment();
+    public static CreateNetworkSettingsFragment newInstance() {
+        CreateNetworkSettingsFragment fragment = new CreateNetworkSettingsFragment();
 
         return fragment;
     }
@@ -32,12 +32,13 @@ public class AlarmSettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_alarm_settings, container, false);
+        return inflater.inflate(R.layout.fragment_create_network_settings, container, false);
     }
 }
