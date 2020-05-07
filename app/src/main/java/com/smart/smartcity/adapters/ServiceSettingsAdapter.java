@@ -76,7 +76,7 @@ public class ServiceSettingsAdapter extends ArrayAdapter<Service> implements Com
         }
     }
 
-    private class ViewHolder {
+    public class ViewHolder {
         private final TextView serviceName;
         private final TextView serviceDescription;
         private final ImageView serviceImage;

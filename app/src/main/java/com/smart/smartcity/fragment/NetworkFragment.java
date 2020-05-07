@@ -10,12 +10,16 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.smart.smartcity.R;
 import com.smart.smartcity.activity.LoginActivity;
 import com.smart.smartcity.activity.MainActivity;
 import com.smart.smartcity.adapters.NetworkPageAdapter;
+import com.smart.smartcity.adapters.ServiceAdapter;
 import com.smart.smartcity.adapters.SettingsPageAdapter;
 import com.smart.smartcity.model.User;
 
@@ -24,7 +28,7 @@ import com.smart.smartcity.model.User;
  * Use the {@link NetworkFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NetworkFragment extends Fragment {
+public class NetworkFragment extends Fragment{
 
 
     public NetworkFragment() {
@@ -48,7 +52,26 @@ public class NetworkFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_network, container, false);
+        View v = inflater.inflate(R.layout.fragment_network, container, false);
+
+        //list to inflate
+        ListView networkList = v.findViewById(R.id.network_list);
+
+        //btn from the list view
+        Button btn =networkList.findViewById(R.id.network_subscribe_button);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
+
+        //name of the network
+        TextView name =networkList.findViewById(R.id.network_name);
+
+
+        return v;
 
     }
 

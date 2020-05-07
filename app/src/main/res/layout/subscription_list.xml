@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="80dp"
+    android:orientation="vertical"
     >
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/network_picture"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/camera_icon"/>
+        android:src="@mipmap/camera_icon" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="#dededee3"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="50dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="170dp"
         tools:ignore="MissingConstraints">
@@ -26,20 +28,11 @@
             android:paddingTop="30dp"
             android:text="Name of Network"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="-4dp" />
+            tools:layout_editor_absoluteX="127dp"
+            tools:layout_editor_absoluteY="0dp" />
 
-        <Button
-            android:id="@+id/network_subscribe_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:background="@drawable/custom_button"
-            android:text="@string/subscribe"
-            tools:layout_editor_absoluteX="295dp"
-            tools:layout_editor_absoluteY="14dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
