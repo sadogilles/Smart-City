@@ -65,7 +65,7 @@ public class NetworkFragment extends Fragment {
         TabLayout tabs = view.findViewById(R.id.network_tab);
         ViewPager pager = view.findViewById(R.id.network_pager);
 
-        User user = getArguments().getParcelable(LoginActivity.USER_KEY);
+        User user = ((MainActivity) getActivity()).getUser();
 
         pager.setAdapter(new NetworkPageAdapter(getChildFragmentManager(), user));
 
