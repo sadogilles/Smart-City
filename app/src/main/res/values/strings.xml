@@ -49,8 +49,9 @@
     <string name="create_network_description">Description</string>
     <string name="submit">Submit</string>
     <string name="subscribe">Subscribe</string>
-    <string name="publish">Publish To Network</string>
+    <string name="publish">Publish</string>
     <string name="publish_title">Publication_title</string>
     <string name="publication_description">Publication Content</string>
     <string name="subscribe_btn_text">Subscribe</string>
+    <string name="validate_publication">Valider</string>
 </resources>
