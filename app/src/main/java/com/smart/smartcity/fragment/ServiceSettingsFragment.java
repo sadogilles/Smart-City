@@ -110,9 +110,20 @@ public class ServiceSettingsFragment extends Fragment implements IServiceListCon
 
     @Override
     public void onImageDownloaded(Bitmap bitmap, int id) {
-        Service service = (Service) serviceSettingsAdapter.getItem(id);
-        service.setImageBitmap(bitmap);
-        serviceSettingsAdapter.notifyDataSetChanged();
+        System.out.println("Downloaded " + id + " !");
+
+        Service service = null;
+
+        for (Service s : services) {
+            if (s.getId() == id) {
+                service = s;
+            }
+        }
+
+        if (service != null) {
+            service.setImageBitmap(bitmap);
+            serviceSettingsAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

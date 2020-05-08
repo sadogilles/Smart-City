@@ -1,14 +1,21 @@
 package com.smart.smartcity.dao;
 
+import android.util.Log;
+
+import com.smart.smartcity.apiservices.InterestApiService;
 import com.smart.smartcity.apiservices.NetworkApiService;
 import com.smart.smartcity.apiservices.UserApiService;
 import com.smart.smartcity.context.IAuthenticationContext;
 import com.smart.smartcity.context.INetworkCreationContext;
+import com.smart.smartcity.context.INetworkListContext;
 import com.smart.smartcity.context.IProfileUpdateContext;
+import com.smart.smartcity.fragment.NetworkAvailableFragment;
+import com.smart.smartcity.model.Interest;
 import com.smart.smartcity.model.Network;
 import com.smart.smartcity.model.User;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
@@ -31,6 +38,7 @@ public class NetworkDAO {
     private Retrofit retrofit;
 
     private INetworkCreationContext networkCreationContext;
+    private INetworkListContext networkListContext;
 
     public NetworkDAO() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -51,6 +59,10 @@ public class NetworkDAO {
 
     public void setNetworkCreationContext(INetworkCreationContext networkCreationContext) {
         this.networkCreationContext = networkCreationContext;
+    }
+
+    public void setNetworkListContext(INetworkListContext networkListContext) {
+        this.networkListContext = networkListContext;
     }
 
     public void insert(Network network) {
@@ -87,4 +99,26 @@ public class NetworkDAO {
         });
     }
 
+    public void findNetworks() {
+        NetworkApiService apiService = retrofit.create(NetworkApiService.class);
+
+        Call<List<Network>> call = apiService.findNetworks();
+        call.enqueue(new Callback<List<Network>>() {
+            @Override
+            public void onResponse(Call<List<Network>> call, Response<List<Network>> response) {
+                if (response.isSuccessful()) {
+                    networkListContext.onGetNetworksSuccessful(response.body());
+                } else {
+                    networkListContext.onGetNetworksFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Network>> call, Throwable t) {
+                Log.e("network", "Error while sending request to authentication API");
+
+                networkListContext.onGetNetworksFailure();
+            }
+        });
+    }
 }
