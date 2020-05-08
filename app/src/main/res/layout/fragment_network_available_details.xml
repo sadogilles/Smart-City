@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.NetworkAvailableDetailsFragment"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/toggle_publish_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_gravity="center"
+        android:textSize="30dp"
+        android:text="@string/publish"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/publication_form"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:src="@mipmap/account_icon"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:hint="@string/publish_title"
+                app:endIconMode="clear_text"
+                android:layout_weight="50"
+
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/publication_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/publication_description"
+            app:endIconMode="clear_text"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/publication_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine|text"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/publish"
+            android:shadowRadius="10"
+            android:gravity="center_horizontal"
+            />
+
+    </LinearLayout>
+
+    <ListView
+
+            android:id="@+id/network_available_details_published_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        />
+
+
+
+</LinearLayout>

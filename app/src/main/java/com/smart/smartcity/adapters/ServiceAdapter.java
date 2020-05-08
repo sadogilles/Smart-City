@@ -54,7 +54,7 @@ public class ServiceAdapter extends ArrayAdapter<Service> {
         return view;
     }
 
-    private class ViewHolder {
+    public class ViewHolder {
         private final TextView serviceNameText;
         private final ImageView serviceImage;
 
