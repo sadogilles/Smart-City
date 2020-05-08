@@ -8,22 +8,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.smart.smartcity.R;
 import com.smart.smartcity.activity.MainActivity;
-import com.smart.smartcity.adapters.InterestSettingsAdapter;
-import com.smart.smartcity.adapters.NetworkAvailableListAdapter;
 import com.smart.smartcity.adapters.NetworkListAdapter;
 import com.smart.smartcity.context.IDownloadImageContext;
 import com.smart.smartcity.context.INetworkListContext;
-import com.smart.smartcity.dao.InterestDAO;
 import com.smart.smartcity.dao.NetworkDAO;
 import com.smart.smartcity.model.Network;
-import com.smart.smartcity.model.Service;
 import com.smart.smartcity.util.DownloadImageTask;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,11 +29,11 @@ import java.util.List;
  * Use the {@link NetworkAvailableFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NetworkAvailableFragment extends Fragment implements INetworkListContext, IDownloadImageContext {
+public class NetworkAvailableFragment extends Fragment implements INetworkListContext, IDownloadImageContext, AdapterView.OnItemClickListener {
     private TextView networkAvailableStatus;
     private ListView networkListView;
     private NetworkListAdapter networkListAdapter;
-    private List<Network> networks;
+    private List<Network> networks = new ArrayList<>();
 
     public NetworkAvailableFragment() {
         // Required empty public constructor
@@ -69,7 +67,7 @@ public class NetworkAvailableFragment extends Fragment implements INetworkListCo
         dao.findNetworks();
 
         networkListView = view.findViewById(R.id.network_list);
-        networkListAdapter = new NetworkListAdapter(getActivity().getApplicationContext(), networks);
+        networkListAdapter = new NetworkListAdapter(getActivity().getApplicationContext(), networks, (MainActivity) getActivity());
         networkListView.setAdapter(networkListAdapter);
 
         return view;
@@ -107,5 +105,12 @@ public class NetworkAvailableFragment extends Fragment implements INetworkListCo
             network.setImageBitmap(bitmap);
             networkListAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Network network = networks.get(position);
+        System.out.println("network : " + network.getName());
+        ((MainActivity) getActivity()).showNetworkDetailsFragment(network);
     }
 }
