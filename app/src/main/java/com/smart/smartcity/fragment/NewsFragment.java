@@ -1,6 +1,5 @@
 package com.smart.smartcity.fragment;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
@@ -14,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.smart.smartcity.R;
-import com.smart.smartcity.activity.LoginActivity;
 import com.smart.smartcity.activity.MainActivity;
 import com.smart.smartcity.adapters.ServiceAdapter;
 import com.smart.smartcity.context.IDownloadImageContext;
@@ -127,4 +125,7 @@ public class NewsFragment extends Fragment implements IServiceListContext, IDown
 
         ((MainActivity) getActivity()).updateBottomMenu(R.id.news_icon);
     }
+
+
+    
 }

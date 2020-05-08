@@ -52,4 +52,7 @@
     <string name="publish">Publish To Network</string>
     <string name="publish_title">Publication_title</string>
     <string name="publication_description">Publication Content</string>
+    <string name="create_agenda">Create an Agenda</string>
+    <!--    GOOGLE MAP KEY-->
+    <string name="map_key" translatable="false">AIzaSyDlN-BwlBJLee5RjJmSKIdNpYPRKrdu0Xg</string>
 </resources>
