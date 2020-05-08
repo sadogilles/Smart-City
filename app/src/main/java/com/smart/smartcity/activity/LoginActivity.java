@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             dao.setAuthenticationContext(this);
             dao.authentify(mailAddress.getText().toString(), password.getText().toString());
         } else if (v.getId() == R.id.signUpButton) {
-            Intent intent = new Intent(this, IRegistrationActivity.class);
+            Intent intent = new Intent(this, RegistrationActivity.class);
             startActivity(intent);
         }
     }

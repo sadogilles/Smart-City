@@ -15,7 +15,7 @@ import com.smart.smartcity.context.IRegistrationContext;
 import com.smart.smartcity.dao.UserDAO;
 import com.smart.smartcity.model.User;
 
-public class IRegistrationActivity extends AppCompatActivity implements View.OnClickListener, IRegistrationContext {
+public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener, IRegistrationContext {
     private EditText mailAddressField;
     private EditText passwordField;
     private EditText firstNameField;
