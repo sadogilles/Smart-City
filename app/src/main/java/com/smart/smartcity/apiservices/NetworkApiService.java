@@ -32,5 +32,5 @@ public interface NetworkApiService {
     Call<List<Publication>> findPublications(@Path("id") int id);
 
     @POST("api/networks/{id}/publications")
-    Call<Publication> insertPublication(@Path("id") int id);
+    Call<Publication> insertPublication(@Path("id") int id, @Body Publication publication);
 }

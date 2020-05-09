@@ -8,7 +8,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Publication {
+public class Publication implements Comparable<Publication> {
     @Expose
     @SerializedName("id")
     private int id;
@@ -99,5 +99,10 @@ public class Publication {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
         return getLocalDate().format(formatter);
+    }
+
+    @Override
+    public int compareTo(Publication o) {
+        return getLocalDate().compareTo(o.getLocalDate());
     }
 }
