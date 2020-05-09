@@ -54,23 +54,6 @@ public class NetworkFragment extends Fragment{
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_network, container, false);
 
-        //list to inflate
-        ListView networkList = v.findViewById(R.id.network_list);
-
-        //btn from the list view
-        Button btn =networkList.findViewById(R.id.network_subscribe_button);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-            }
-        });
-
-        //name of the network
-        TextView name =networkList.findViewById(R.id.network_name);
-
-
         return v;
 
     }

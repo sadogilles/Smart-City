@@ -8,6 +8,13 @@
     android:orientation="vertical"
 
     >
+
+    <TextView
+        android:id="@+id/network_creation_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
     <LinearLayout
         android:padding="40dp"
         android:layout_width="match_parent"
