@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -29,7 +30,7 @@ import static java.lang.System.out;
  * Use the {@link TrafficFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TrafficFragment extends Fragment {
+public class TrafficFragment extends Fragment implements OnMapReadyCallback {
     // TODO: Rename parameter arguments, choose names that match
 
     //variable for google maps
@@ -115,5 +116,11 @@ public class TrafficFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        //set map
+        map = googleMap;
     }
 }
