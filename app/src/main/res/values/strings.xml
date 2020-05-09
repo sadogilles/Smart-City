@@ -54,4 +54,5 @@
     <string name="publication_description">Publication Content</string>
     <string name="subscribe_btn_text">Subscribe</string>
     <string name="validate_publication">Valider</string>
+    <string name="create_agenda">Create An Agenda</string>
 </resources>
