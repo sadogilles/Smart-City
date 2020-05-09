@@ -14,6 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<!--        meta data for google maps-->
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/map_key" />
         <activity android:name=".activity.RegistrationActivity" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
@@ -26,7 +28,7 @@
 <!--        activity used for cropping-->
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/> <!-- optional (needed if default theme has no action bar) -->
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="@string/api_key" />
+
     </application>
 
 </manifest>

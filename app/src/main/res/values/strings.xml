@@ -55,5 +55,6 @@
     <string name="subscribe_btn_text">Subscribe</string>
     <string name="validate_publication">Valider</string>
     <string name="create_agenda">Create An Agenda</string>
-    <string name="api_key">AIzaSyCbEMo8KHx5qqQMGqsZex3CYJtD0nAwAzA</string>
+<!--    api map key-->
+    <string name="map_key" translatable="false">AIzaSyDlN-BwlBJLee5RjJmSKIdNpYPRKrdu0Xg</string>
 </resources>

@@ -74,6 +74,7 @@ public class TrafficFragment extends Fragment implements OnMapReadyCallback {
 
                 //get the enter string
                 String location = searchView.getQuery().toString();
+
                 out.println(location);
 
                 //list of addrss
@@ -98,7 +99,7 @@ public class TrafficFragment extends Fragment implements OnMapReadyCallback {
                     //get the lattitude and longitude
                     LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
 
-                    //add lat and long with title to google map
+                    //add lat and long with title to google map: that is point to a location
                     map.addMarker(new MarkerOptions().position(latLng).title(location));
 
                     //enable zoom
@@ -118,9 +119,11 @@ public class TrafficFragment extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //set map
         map = googleMap;
     }
+
+
 }
