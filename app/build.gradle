@@ -11,7 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        //error also here
+        //to fixed single index error
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -50,12 +50,13 @@ dependencies {
     // implementation 'com.edmodo:cropper:2.0.0'
     // implementation 'com.edmodo:cropper:2.0.0'
     //crop image
-    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    api 'com.theartofdev.edmodo:android-image-cropper:2.+'
     //circular image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //grade compilation error cannot fit requested classes in a single dex file
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.google.android.gms:play-services:12.0.1'
-    implementation 'com.google.android.gms:play-services-maps:12.0.1'
+    //play services for google maps
+
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
 }
