@@ -5,9 +5,10 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.smart.smartcity.apiservices.NetworkApiService;
+import com.smart.smartcity.context.IPublicationCreationContext;
 import com.smart.smartcity.context.IPublicationListContext;
-import com.smart.smartcity.model.Network;
 import com.smart.smartcity.model.Publication;
+import com.smart.smartcity.model.User;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class PublicationDAO {    private static final String BASE_API_URL = "htt
     private Retrofit retrofit;
 
     private IPublicationListContext publicationListContext;
+    private IPublicationCreationContext publicationCreationContext;
 
     public PublicationDAO() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -46,6 +48,10 @@ public class PublicationDAO {    private static final String BASE_API_URL = "htt
         this.publicationListContext = publicationListContext;
     }
 
+    public void setPublicationCreationContext(IPublicationCreationContext publicationCreationContext) {
+        this.publicationCreationContext = publicationCreationContext;
+    }
+
     public void findPublications(int networkId) {
         NetworkApiService apiService = retrofit.create(NetworkApiService.class);
 
@@ -65,6 +71,33 @@ public class PublicationDAO {    private static final String BASE_API_URL = "htt
                 Log.e("publication", "Error while sending request to publication API");
                 Log.e("publication", t.getMessage());
                 publicationListContext.onGetPublicationsFailure();
+            }
+        });
+    }
+
+    public void insertPublication(Publication publication) {
+        NetworkApiService apiService = retrofit.create(NetworkApiService.class);
+
+        Call<Publication> call = apiService.insertPublication(publication.getNetworkId(), publication);
+        call.enqueue(new Callback<Publication>() {
+            @Override
+            public void onResponse(Call<Publication> call, Response<Publication> response) {
+                if (response.isSuccessful()) {
+                    if (publicationCreationContext != null) {
+                        publicationCreationContext.onPublicationCreationSuccessful(response.body());
+                    }
+                } else {
+                    if (publicationCreationContext != null) {
+                        publicationCreationContext.onPublicationCreationFailure();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Publication> call, Throwable t) {
+                if (publicationCreationContext != null) {
+                    publicationCreationContext.onPublicationCreationFailure();
+                }
             }
         });
     }

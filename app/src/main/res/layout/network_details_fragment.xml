@@ -7,7 +7,6 @@
     tools:context=".fragment.NetworkDetailsFragment"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -26,7 +25,7 @@
         <LinearLayout
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
@@ -49,8 +48,7 @@
     <Button
         android:id="@+id/toggle_publish_form"
         android:layout_width="150sp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_gravity="center"
         android:textSize="20dp"
@@ -60,56 +58,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="6"
         android:orientation="vertical"
         android:visibility="gone"
-        android:id="@+id/publication_form"
-        >
-        <!--LinearLayout
+        android:id="@+id/publication_form">
+        <TextView
+            android:id="@+id/publication_creation_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <ImageView
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@mipmap/account_icon"
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:hint="@string/publish_title"
-                app:endIconMode="clear_text"
-                android:layout_weight="5"
-
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/publication_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout-->
+            android:text="" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:hint="@string/publication_description"
             app:endIconMode="clear_text"
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/publication_description"
+                android:id="@+id/new_publication_content"
                 android:layout_width="match_parent"
-                android:layout_height="150sp"
+                android:layout_height="match_parent"
                 android:inputType="textMultiLine|text"
+                android:lines="5"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/new_publication_publish_btn"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

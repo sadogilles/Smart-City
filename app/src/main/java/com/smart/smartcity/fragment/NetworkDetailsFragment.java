@@ -14,20 +14,29 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 import com.smart.smartcity.R;
 import com.smart.smartcity.activity.MainActivity;
 import com.smart.smartcity.adapters.NetworkListAdapter;
 import com.smart.smartcity.adapters.PublicationListAdapter;
 import com.smart.smartcity.context.IDownloadImageContext;
+import com.smart.smartcity.context.IPublicationCreationContext;
 import com.smart.smartcity.context.IPublicationListContext;
 import com.smart.smartcity.dao.NetworkDAO;
 import com.smart.smartcity.dao.PublicationDAO;
 import com.smart.smartcity.model.Network;
 import com.smart.smartcity.model.Publication;
+import com.smart.smartcity.model.User;
 import com.smart.smartcity.util.DownloadImageTask;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -36,9 +45,10 @@ import java.util.List;
  * Use the {@link NetworkDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NetworkDetailsFragment extends Fragment implements View.OnClickListener, IDownloadImageContext, IPublicationListContext {
+public class NetworkDetailsFragment extends Fragment implements View.OnClickListener, IDownloadImageContext, IPublicationListContext, IPublicationCreationContext {
     private static final String NETWORK_KEY = "NETWORK";
     private Network network;
+    private User user;
     private MaterialTextView networkName;
     private MaterialTextView networkDescription;
     private ImageView networkImage;
@@ -48,6 +58,12 @@ public class NetworkDetailsFragment extends Fragment implements View.OnClickList
     private TextView publicationListStatus;
     private PublicationListAdapter publicationListAdapter;
     private List<Publication> publications = new ArrayList<>();
+    private PublicationDAO publicationDAO;
+    private TextView publicationCreationStatus;
+
+    // Publication form
+    private TextInputEditText newPublicationContent;
+    private Button newPublicationPublishButton;
 
     public NetworkDetailsFragment() {
         // Required empty public constructor
@@ -78,6 +94,7 @@ public class NetworkDetailsFragment extends Fragment implements View.OnClickList
         View view = inflater.inflate(R.layout.network_details_fragment, container, false);
 
         network = (Network) getArguments().getParcelable(NETWORK_KEY);
+        user = ((MainActivity) getActivity()).getUser();
 
         networkName = view.findViewById(R.id.network_details_name);
         networkDescription = view.findViewById(R.id.network_details_description);
@@ -86,6 +103,9 @@ public class NetworkDetailsFragment extends Fragment implements View.OnClickList
         publicationForm = view.findViewById(R.id.publication_form);
         publicationListView = view.findViewById(R.id.network_details_publication_list);
         publicationListStatus = view.findViewById(R.id.publication_list_status);
+        newPublicationContent = view.findViewById(R.id.new_publication_content);
+        newPublicationPublishButton = view.findViewById(R.id.new_publication_publish_btn);
+        publicationCreationStatus = view.findViewById(R.id.publication_creation_status);
 
         // Fills network metadata
         networkName.setText(network.getName());
@@ -102,9 +122,11 @@ public class NetworkDetailsFragment extends Fragment implements View.OnClickList
         publicationListView.setAdapter(publicationListAdapter);
 
         // Find publications from web API
-        PublicationDAO dao = new PublicationDAO();
-        dao.setPublicationListContext(this);
-        dao.findPublications(network.getId());
+        publicationDAO = new PublicationDAO();
+        publicationDAO.setPublicationListContext(this);
+        publicationDAO.findPublications(network.getId());
+
+        newPublicationPublishButton.setOnClickListener(this);
 
         return view;
     }
@@ -117,6 +139,14 @@ public class NetworkDetailsFragment extends Fragment implements View.OnClickList
             } else if (publicationForm.getVisibility() == View.VISIBLE) {
                 publicationForm.setVisibility(View.GONE);
             }
+        } else if (v.getId() == R.id.new_publication_publish_btn) {
+            String content = newPublicationContent.getText().toString();
+
+            Instant now = Instant.now();
+            String date = DateTimeFormatter.ISO_INSTANT.format(now);
+            Publication publication = new Publication(network.getId(), user.getId(), date, content);
+            publicationDAO.setPublicationCreationContext(this);
+            publicationDAO.insertPublication(publication);
         }
     }
 
@@ -133,11 +163,27 @@ public class NetworkDetailsFragment extends Fragment implements View.OnClickList
         this.publications.addAll(publications);
         publicationListAdapter.clear();
         publicationListAdapter.addAll(publications);
+        publicationListAdapter.sort(new Comparator<Publication>() {
+            @Override
+            public int compare(Publication o1, Publication o2) {
+                return o2.compareTo(o1);
+            }
+        });
         publicationListAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onGetPublicationsFailure() {
         publicationListStatus.setText("Error : can't get publication list");
+    }
+
+    @Override
+    public void onPublicationCreationSuccessful(Publication publication) {
+        publicationDAO.findPublications(network.getId());
+    }
+
+    @Override
+    public void onPublicationCreationFailure() {
+        publicationCreationStatus.setText("Error : can't create publication");
     }
 }
