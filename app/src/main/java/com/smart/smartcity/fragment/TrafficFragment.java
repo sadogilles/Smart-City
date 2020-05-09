@@ -14,11 +14,14 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.smart.smartcity.R;
+import com.smart.smartcity.activity.MainActivity;
+import com.smart.smartcity.model.User;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,17 +34,14 @@ import static java.lang.System.out;
  * create an instance of this fragment.
  */
 public class TrafficFragment extends Fragment implements OnMapReadyCallback {
-    // TODO: Rename parameter arguments, choose names that match
-
-    //variable for google maps
-    GoogleMap map=null;
-    SupportMapFragment mapFragment=null;
-    SearchView searchView=null;
+    private User user;
+    private MapView mapView;
+    private GoogleMap googleMap;
+    private SearchView searchView;
 
     public TrafficFragment() {
         // Required empty public constructor
     }
-
 
     public static TrafficFragment newInstance() {
         TrafficFragment fragment = new TrafficFragment();
@@ -61,53 +61,30 @@ public class TrafficFragment extends Fragment implements OnMapReadyCallback {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_traffic, container, false);
 
-        searchView= (SearchView)view.findViewById(R.id.google_maps_search);
+        user = ((MainActivity) getActivity()).getUser();
 
+        mapView = view.findViewById(R.id.map_view);
+        searchView = view.findViewById(R.id.search_view);
 
-        //connect with the fragment for ma p
-        mapFragment = (SupportMapFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.google_maps);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
             @Override
             public boolean onQueryTextSubmit(String query) {
-
-                //get the enter string
-                String location = searchView.getQuery().toString();
-                out.println(location);
-
-                //list of addrss
-                List<Address> addressList=null;
-
-                if(location !=null || !location.equals(" ")){
-
-                    //add our activity to geocoder
-                    Geocoder geocoder = new Geocoder(getActivity());
-
-                    try{
-                        //get a list of address from the location string that was entered
-                        addressList =geocoder.getFromLocationName(location,1);
-
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    }
-
-                    //get the first address result
-                    Address address =   addressList.get(0);
-
-                    //get the lattitude and longitude
-                    LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
-
-                    //add lat and long with title to google map
-                    map.addMarker(new MarkerOptions().position(latLng).title(location));
-
-                    //enable zoom
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
-
+                System.out.println("begin");
+                if (googleMap == null) {
+                    return false;
                 }
-                return false;
-            }
 
+                String location = searchView.getQuery().toString();
+
+                if (location == null || location.equals("")) {
+                    return false;
+                }
+
+                return setFocus(location);
+            }
 
             @Override
             public boolean onQueryTextChange(String newText) {
@@ -118,9 +95,41 @@ public class TrafficFragment extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
+    public boolean setFocus(String location) {
+        List<Address> addressList;
+        Geocoder geocoder = new Geocoder(getActivity());
+
+        try{
+            //get a list of address from the location string that was entered
+            addressList = geocoder.getFromLocationName(location,1);
+        }catch (IOException e){
+            e.printStackTrace();
+
+            return false;
+        }
+
+        Address address =   addressList.get(0);
+        //get the lattitude and longitude
+        LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
+        //add lat and long with title to google map
+        googleMap.addMarker(new MarkerOptions().position(latLng).title(location));
+
+        //enable zoom
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+
+        return true;
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //set map
-        map = googleMap;
+        System.out.println("map ready");
+        this.googleMap = googleMap;
+
+        googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+        googleMap.setMyLocationEnabled(true);
+        googleMap.setTrafficEnabled(true);
+        setFocus(user.getTown());
+
+        mapView.onResume();
     }
 }

@@ -1,5 +1,7 @@
 package com.smart.smartcity.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
@@ -61,11 +65,27 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     private CurrentFragment currentFragment = CurrentFragment.NONE;
     private BottomNavigationView bottomMenuView;
 
+    private static final String[] ACCESS_FINE_LOCATION_PERMISSION = {
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
+
+    private static final String[] ACCESS_COARSE_LOCATION_PERMISSION = {
+            Manifest.permission.ACCESS_COARSE_LOCATION
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // TODO: Show an explanation if needed
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, ACCESS_FINE_LOCATION_PERMISSION, 0);
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, ACCESS_COARSE_LOCATION_PERMISSION, 1);
+        }
 
         user = getIntent().getExtras().getParcelable(LoginActivity.USER_KEY);
 

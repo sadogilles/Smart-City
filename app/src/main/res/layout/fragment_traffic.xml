@@ -5,16 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".fragment.NewsFragment">
 
-    <fragment
-        android:id="@+id/google_maps"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="-38dp" />
+        android:layout_height="match_parent" />
 
     <SearchView
-        android:id="@+id/google_maps_search"
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
