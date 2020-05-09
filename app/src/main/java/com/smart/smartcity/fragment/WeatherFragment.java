@@ -34,7 +34,7 @@ public class WeatherFragment extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static WeatherFragment newInstance(String param1, String param2) {
+    public static WeatherFragment newInstance() {
         WeatherFragment fragment = new WeatherFragment();
 
         return fragment;

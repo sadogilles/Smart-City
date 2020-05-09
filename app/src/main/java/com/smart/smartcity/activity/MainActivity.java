@@ -33,6 +33,8 @@ import com.smart.smartcity.fragment.ProfileSettingsFragment;
 import com.smart.smartcity.adapters.SettingsPageAdapter;
 import com.smart.smartcity.fragment.SettingsFragment;
 import com.smart.smartcity.fragment.TradeFragment;
+import com.smart.smartcity.fragment.TrafficFragment;
+import com.smart.smartcity.fragment.WeatherFragment;
 import com.smart.smartcity.model.Network;
 import com.smart.smartcity.model.Service;
 import com.smart.smartcity.model.User;
@@ -192,13 +194,29 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     }
 
     public void showNetworkDetailsFragment(Network network) {
-        if(currentFragment != CurrentFragment.SETTINGS) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            NetworkDetailsFragment fragment = NetworkDetailsFragment.newInstance(network);
-            transaction.replace(R.id.main_fragment, fragment);
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        NetworkDetailsFragment fragment = NetworkDetailsFragment.newInstance(network);
+        transaction.replace(R.id.main_fragment, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void showTrafficFragment() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        TrafficFragment fragment = TrafficFragment.newInstance();
+        transaction.replace(R.id.main_fragment, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void showWeatherFragment() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        WeatherFragment fragment = WeatherFragment.newInstance();
+        transaction.replace(R.id.main_fragment, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     public void updateBottomMenu(int icon) {

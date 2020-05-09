@@ -35,7 +35,6 @@ public class ServiceDAO {
     public void findServicesByUserId(int userId) {
         ServiceApiService apiService = retrofit.create(ServiceApiService.class);
 
-
         Call<List<Service>> call = apiService.findServicesByUserId(userId);
         call.enqueue(new Callback<List<Service>>() {
             @Override

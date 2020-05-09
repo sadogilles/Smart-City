@@ -8,4 +8,6 @@ public interface IMainFragmentContext {
     void showNetworkFragment();
     void configureAndShowSettingsFragment();
     void showNetworkDetailsFragment(Network network);
+    void showTrafficFragment();
+    void showWeatherFragment();
 }

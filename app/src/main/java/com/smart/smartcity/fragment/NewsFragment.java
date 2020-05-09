@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,9 +17,11 @@ import com.smart.smartcity.R;
 import com.smart.smartcity.activity.MainActivity;
 import com.smart.smartcity.adapters.ServiceAdapter;
 import com.smart.smartcity.context.IDownloadImageContext;
+import com.smart.smartcity.context.IMainFragmentContext;
 import com.smart.smartcity.context.IServiceListContext;
 import com.smart.smartcity.dao.ServiceDAO;
 import com.smart.smartcity.model.Service;
+import com.smart.smartcity.model.ServiceType;
 import com.smart.smartcity.model.User;
 import com.smart.smartcity.util.DownloadImageTask;
 
@@ -30,11 +33,10 @@ import java.util.List;
  * Use the {@link NewsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewsFragment extends Fragment implements IServiceListContext, IDownloadImageContext {
+public class NewsFragment extends Fragment implements IServiceListContext, IDownloadImageContext, AdapterView.OnItemClickListener {
 
     private ServiceAdapter serviceAdapter = null;
     private ListView serviceListView = null;
-    //TODO: Remove?
     private List<Service> services = new ArrayList<Service>();
     private User user = null;
     private TextView noServiceActivatedStatus;
@@ -72,7 +74,7 @@ public class NewsFragment extends Fragment implements IServiceListContext, IDown
         serviceAdapter = new ServiceAdapter(getActivity().getApplicationContext(), services);
         serviceListView.setAdapter(serviceAdapter);
         noServiceActivatedStatus = view.findViewById(R.id.noServiceActivatedStatus);
-
+        serviceListView.setOnItemClickListener(this);
 
         return view;
     }
@@ -92,6 +94,7 @@ public class NewsFragment extends Fragment implements IServiceListContext, IDown
         serviceAdapter.notifyDataSetChanged();
 
         for (Service service : services) {
+            System.out.println("service : " + service);
             new DownloadImageTask(this, service.getId()).execute(service.getImageUrl());
         }
     }
@@ -127,5 +130,17 @@ public class NewsFragment extends Fragment implements IServiceListContext, IDown
     }
 
 
-    
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Service service = services.get(position);
+        IMainFragmentContext mainFragmentContext = ((IMainFragmentContext) getActivity());
+
+        switch(service.getServiceTypeEnum()) {
+            case TRAFFIC:
+                mainFragmentContext.showTrafficFragment();
+                break;
+            case METEO:
+                mainFragmentContext.showWeatherFragment();
+        }
+    }
 }

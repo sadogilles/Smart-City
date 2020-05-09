@@ -10,7 +10,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:orientation="horizontal">
 
         <ImageView
@@ -34,21 +35,22 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="Name of Network"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/network_details_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Description of Network"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/toggle_publish_form"
         android:layout_width="150sp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_gravity="center"
         android:textSize="20dp"
@@ -57,12 +59,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
         android:orientation="vertical"
         android:visibility="gone"
         android:id="@+id/publication_form"
         >
-        <LinearLayout
+        <!--LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -90,18 +93,18 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-        </LinearLayout>
+        </LinearLayout-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:hint="@string/publication_description"
             app:endIconMode="clear_text"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/publication_description"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150sp"
                 android:inputType="textMultiLine|text"
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -121,11 +124,13 @@
     <TextView
         android:id="@+id/publication_list_status"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="" />
 
     <ListView
-            android:id="@+id/network_details_publication_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:id="@+id/network_details_publication_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"/>
 </LinearLayout>

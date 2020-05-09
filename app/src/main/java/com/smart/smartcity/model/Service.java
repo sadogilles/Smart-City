@@ -26,6 +26,10 @@ public class Service {
     @SerializedName("description")
     private String description;
 
+    @Expose
+    @SerializedName("serviceType")
+    private String serviceType;
+
     private Bitmap imageBitmap = null;
 
     public int getId() {
@@ -74,5 +78,17 @@ public class Service {
 
     public void setImageBitmap(Bitmap imageBitmap) {
         this.imageBitmap = imageBitmap;
+    }
+
+    public ServiceType getServiceTypeEnum() {
+        return ServiceType.valueOf(serviceType);
+    }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
     }
 }
