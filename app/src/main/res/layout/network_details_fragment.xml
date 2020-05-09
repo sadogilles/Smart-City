@@ -118,13 +118,14 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/publication_list_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
     <ListView
-
-            android:id="@+id/network_available_details_published_list"
+            android:id="@+id/network_details_publication_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        />
-
-
-
+            android:layout_height="wrap_content" />
 </LinearLayout>
