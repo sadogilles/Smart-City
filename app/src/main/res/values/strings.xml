@@ -56,4 +56,7 @@
     <string name="validate_publication">Valider</string>
     <string name="create_agenda">Create An Agenda</string>
     <string translatable="false" name="api_key">AIzaSyDlN-BwlBJLee5RjJmSKIdNpYPRKrdu0Xg</string>
+    <string name="temperature">temperature</string>
+    <string name="humidity">"humidity : "</string>
+    <string name="degree">\u00B0 C</string>
 </resources>
