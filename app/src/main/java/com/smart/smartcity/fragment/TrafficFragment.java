@@ -116,7 +116,7 @@ public class TrafficFragment extends Fragment implements OnMapReadyCallback {
 
         //enable zoom
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
-
+        //return true
         return true;
     }
 
