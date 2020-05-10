@@ -58,5 +58,8 @@ dependencies {
     //play services for google maps
 
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    //for constraint layout
+    implementation 'com.android.support.constraint:constraint-layout:2.0.0-beta5'
+    implementation 'com.android.support.constraint:constraint-layout-solver:2.0.0-beta5'
 
 }

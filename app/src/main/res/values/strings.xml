@@ -55,6 +55,9 @@
     <string name="subscribe_btn_text">Subscribe</string>
     <string name="validate_publication">Valider</string>
     <string name="create_agenda">Create An Agenda</string>
+    <string name="temperature">temperature</string>
+    <string name="humidity">"humidity : "</string>
+    <string name="degree">\u00B0 C</string>
     <string name="api_key" translatable="false">AIzaSyDlN-BwlBJLee5RjJmSKIdNpYPRKrdu0Xg</string>
     <string name="validate_network_edition">Validate</string>
     <string name="admin_network_btn_text">Administration</string>

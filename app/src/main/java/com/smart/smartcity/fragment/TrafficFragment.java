@@ -64,33 +64,33 @@ public class TrafficFragment extends Fragment implements OnMapReadyCallback {
         user = ((MainActivity) getActivity()).getUser();
 
         mapView = view.findViewById(R.id.map_view);
-        searchView = view.findViewById(R.id.search_view);
+        //searchView = view.findViewById(R.id.search_view);
 
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                System.out.println("begin");
-                if (googleMap == null) {
-                    return false;
-                }
-
-                String location = searchView.getQuery().toString();
-
-                if (location == null || location.equals("")) {
-                    return false;
-                }
-
-                return setFocus(location);
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                System.out.println("begin");
+//                if (googleMap == null) {
+//                    return false;
+//                }
+//
+//                String location = searchView.getQuery().toString();
+//
+//                if (location == null || location.equals("")) {
+//                    return false;
+//                }
+//
+//                return setFocus(location);
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
 
         return view;
     }
