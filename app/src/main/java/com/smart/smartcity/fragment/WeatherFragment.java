@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.smart.smartcity.R;
 import com.smart.smartcity.activity.MainActivity;
@@ -60,6 +61,9 @@ public class WeatherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_weather, container, false);
+
         user = ((MainActivity)getActivity()).getUser();
         userTown = user.getTown();
         String main = null;
@@ -76,7 +80,14 @@ public class WeatherFragment extends Fragment {
 
         try {
             //request-->OK
-            content = (String) weather.execute(url).get();Log.i("contentData",content);
+            content = (String) weather.execute(url).get();
+
+            if (content == null) {
+                Toast.makeText(getActivity(), "Error : Can't contact Weather API, please check user town", Toast.LENGTH_LONG).show();
+                return v;
+            }
+
+            Log.i("contentData",content);
 
             //parsing the data
             JSONObject js = new JSONObject(content);
@@ -91,9 +102,9 @@ public class WeatherFragment extends Fragment {
 
                 JSONObject weatherPart = data.getJSONObject(i);
 
-                 main = weatherPart.getString("main");
-                 description= weatherPart.getString("description");
-                 icon = weatherPart.getString("icon");
+                main = weatherPart.getString("main");
+                description= weatherPart.getString("description");
+                icon = weatherPart.getString("icon");
             }
 
             System.out.println("\n \n");
@@ -107,13 +118,13 @@ public class WeatherFragment extends Fragment {
             String sys = js.getString("sys"); //returns  a string with a json object
             JSONObject sysObject = new JSONObject(sys);
 
-          System.out.println(sysObject);
+            System.out.println(sysObject);
 
-          String countryCode=sysObject.getString("country");
+            String countryCode=sysObject.getString("country");
 
-          System.out.println(countryCode);
+            System.out.println(countryCode);
 
-          //convert the country Code to country using in build java locale variable
+            //convert the country Code to country using in build java locale variable
             Locale l = new Locale("",countryCode);
 
             country =l.getDisplayCountry();
@@ -147,8 +158,6 @@ public class WeatherFragment extends Fragment {
 
 
 
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_weather, container, false);
 
         ((TextView)(v.findViewById(R.id.temperature))).setText(temperature);
         ((TextView)(v.findViewById(R.id.humidity))).setText(humidity);
