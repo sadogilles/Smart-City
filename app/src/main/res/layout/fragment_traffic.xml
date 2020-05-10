@@ -10,18 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <SearchView
-        android:id="@+id/search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:background="@drawable/bg_round"
-        android:elevation="5dp"
-        android:iconifiedByDefault="false"
-        android:queryHint="Search..."
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="683dp" />
+<!--    <SearchView-->
+<!--        android:id="@+id/search_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="25dp"-->
+<!--        android:background="@drawable/bg_round"-->
+<!--        android:elevation="5dp"-->
+<!--        android:iconifiedByDefault="false"-->
+<!--        android:queryHint="Search..."-->
+<!--        tools:ignore="MissingConstraints"-->
+<!--        tools:layout_editor_absoluteX="25dp"-->
+<!--        tools:layout_editor_absoluteY="683dp" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
