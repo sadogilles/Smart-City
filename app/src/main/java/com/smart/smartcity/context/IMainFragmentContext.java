@@ -10,4 +10,5 @@ public interface IMainFragmentContext {
     void showNetworkDetailsFragment(Network network);
     void showTrafficFragment();
     void showWeatherFragment();
+    void showNetworkAdministrationFragment(Network network);
 }

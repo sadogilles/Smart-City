@@ -7,13 +7,15 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Network implements Parcelable {
     @Expose
     @SerializedName("id")
     private int id;
 
     @Expose
-    @SerializedName("author_id")
+    @SerializedName("authorId")
     private int authorId;
 
     @Expose
@@ -27,6 +29,10 @@ public class Network implements Parcelable {
     @Expose
     @SerializedName("imageUrl")
     private String imageUrl;
+
+    @Expose
+    @SerializedName("subscriptions")
+    private List<Subscription> subscriptions;
 
     private String localImageUri;
 
@@ -117,6 +123,13 @@ public class Network implements Parcelable {
         this.imageBitmap = imageBitmap;
     }
 
+    public List<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(List<Subscription> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
 
     @Override
     public int describeContents() {

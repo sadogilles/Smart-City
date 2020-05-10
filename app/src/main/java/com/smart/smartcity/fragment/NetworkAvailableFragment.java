@@ -19,6 +19,7 @@ import com.smart.smartcity.context.IDownloadImageContext;
 import com.smart.smartcity.context.INetworkListContext;
 import com.smart.smartcity.dao.NetworkDAO;
 import com.smart.smartcity.model.Network;
+import com.smart.smartcity.model.User;
 import com.smart.smartcity.util.DownloadImageTask;
 
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ public class NetworkAvailableFragment extends Fragment implements INetworkListCo
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_network_available, container, false);
+        User user = ((MainActivity) getActivity()).getUser();
 
         networkAvailableStatus = view.findViewById(R.id.network_available_status);
 
@@ -67,7 +69,7 @@ public class NetworkAvailableFragment extends Fragment implements INetworkListCo
         dao.findNetworks();
 
         networkListView = view.findViewById(R.id.network_list);
-        networkListAdapter = new NetworkListAdapter(getActivity().getApplicationContext(), networks, (MainActivity) getActivity());
+        networkListAdapter = new NetworkListAdapter(getActivity().getApplicationContext(), networks, (MainActivity) getActivity(), user);
         networkListView.setAdapter(networkListAdapter);
 
         return view;

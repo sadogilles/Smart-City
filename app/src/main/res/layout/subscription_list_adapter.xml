@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/subscription_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:textSize="20sp"
+        android:text="Nom prenom" />
+
+    <Button
+        android:id="@+id/subscription_accept_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:text="@string/accept_subscription" />
+
+    <Button
+        android:id="@+id/subscription_reject_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_weight="1"
+        android:textSize="20sp"
+        android:text="@string/reject_subscription" />
+</LinearLayout>

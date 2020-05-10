@@ -2,6 +2,7 @@ package com.smart.smartcity.apiservices;
 
 import com.smart.smartcity.model.Network;
 import com.smart.smartcity.model.Publication;
+import com.smart.smartcity.model.Subscription;
 import com.smart.smartcity.model.User;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import retrofit2.http.Path;
 public interface NetworkApiService {
     @Multipart
     @POST("api/networks")
-    Call<Network> insert(@Part("author_id") RequestBody authorId,
+    Call<Network> insert(@Part("authorId") RequestBody authorId,
                          @Part("name") RequestBody name,
                          @Part("description") RequestBody description,
                          @Part MultipartBody.Part image);
@@ -33,4 +34,10 @@ public interface NetworkApiService {
 
     @POST("api/networks/{id}/publications")
     Call<Publication> insertPublication(@Path("id") int id, @Body Publication publication);
+
+    @POST("api/networks/{id}/subscriptions")
+    Call<Subscription> insertSubscription(@Path("id") int id, @Body Subscription subscription);
+
+    @PUT("api/networks/{id}/subscriptions/{subscriptionId}")
+    Call<Subscription> updateSubscription(@Path("id") int id, @Path("subscriptionId") int subscriptionId, @Body Subscription subscription);
 }

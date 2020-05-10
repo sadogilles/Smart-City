@@ -55,5 +55,10 @@
     <string name="subscribe_btn_text">Subscribe</string>
     <string name="validate_publication">Valider</string>
     <string name="create_agenda">Create An Agenda</string>
-    <string translatable="false" name="api_key">AIzaSyDlN-BwlBJLee5RjJmSKIdNpYPRKrdu0Xg</string>
+    <string name="api_key" translatable="false">AIzaSyDlN-BwlBJLee5RjJmSKIdNpYPRKrdu0Xg</string>
+    <string name="validate_network_edition">Validate</string>
+    <string name="admin_network_btn_text">Administration</string>
+    <string name="accept_subscription">Accept</string>
+    <string name="reject_subscription">Reject</string>
+    <string name="subscription_requests_text">Subscription requests</string>
 </resources>

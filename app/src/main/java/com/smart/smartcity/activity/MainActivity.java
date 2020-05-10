@@ -30,6 +30,7 @@ import com.smart.smartcity.dao.ServiceDAO;
 import com.smart.smartcity.fragment.BottomMenuFragment;
 import com.smart.smartcity.fragment.HomeFragment;
 import com.smart.smartcity.fragment.InterestSettingsFragment;
+import com.smart.smartcity.fragment.NetworkAdministrationFragment;
 import com.smart.smartcity.fragment.NetworkDetailsFragment;
 import com.smart.smartcity.fragment.NetworkFragment;
 import com.smart.smartcity.fragment.NewsFragment;
@@ -216,6 +217,15 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     public void showNetworkDetailsFragment(Network network) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         NetworkDetailsFragment fragment = NetworkDetailsFragment.newInstance(network);
+        transaction.replace(R.id.main_fragment, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void showNetworkAdministrationFragment(Network network) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        NetworkAdministrationFragment fragment = NetworkAdministrationFragment.newInstance(network);
         transaction.replace(R.id.main_fragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

@@ -34,20 +34,31 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="Name of Network"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/network_details_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Description of Network"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
+
+
+
+            <Button
+                android:id="@+id/admin_network_button"
+                android:layout_width="170sp"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button"
+                android:visibility="gone"
+                android:textSize="20dp"
+                android:text="@string/admin_network_btn_text" />
         </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/toggle_publish_form"
-        android:layout_width="150sp"
+        android:layout_width="170sp"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_gravity="center"

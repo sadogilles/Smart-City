@@ -2,16 +2,21 @@ package com.smart.smartcity.dao;
 
 import android.util.Log;
 
+import com.smart.smartcity.activity.LoginActivity;
 import com.smart.smartcity.apiservices.InterestApiService;
 import com.smart.smartcity.apiservices.NetworkApiService;
 import com.smart.smartcity.apiservices.UserApiService;
+import com.smart.smartcity.context.IAcceptSubscriptionContext;
 import com.smart.smartcity.context.IAuthenticationContext;
 import com.smart.smartcity.context.INetworkCreationContext;
 import com.smart.smartcity.context.INetworkListContext;
 import com.smart.smartcity.context.IProfileUpdateContext;
+import com.smart.smartcity.context.ISubscribeContext;
 import com.smart.smartcity.fragment.NetworkAvailableFragment;
+import com.smart.smartcity.fragment.NewsFragment;
 import com.smart.smartcity.model.Interest;
 import com.smart.smartcity.model.Network;
+import com.smart.smartcity.model.Subscription;
 import com.smart.smartcity.model.User;
 
 import java.io.File;
@@ -39,6 +44,9 @@ public class NetworkDAO {
 
     private INetworkCreationContext networkCreationContext;
     private INetworkListContext networkListContext;
+    private IAcceptSubscriptionContext acceptSubscriptionContext;
+
+    private ISubscribeContext subscribeContext;
 
     public NetworkDAO() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -63,6 +71,14 @@ public class NetworkDAO {
 
     public void setNetworkListContext(INetworkListContext networkListContext) {
         this.networkListContext = networkListContext;
+    }
+
+    public void setAcceptSubscriptionContext(IAcceptSubscriptionContext acceptSubscriptionContext) {
+        this.acceptSubscriptionContext = acceptSubscriptionContext;
+    }
+
+    public void setSubscribeContext(ISubscribeContext subscribeContext) {
+        this.subscribeContext = subscribeContext;
     }
 
     public void insert(Network network) {
@@ -118,6 +134,61 @@ public class NetworkDAO {
                 Log.e("network", "Error while sending request to authentication API");
 
                 networkListContext.onGetNetworksFailure();
+            }
+        });
+    }
+
+    public void insertSubscription(Subscription subscription) {
+        NetworkApiService apiService = retrofit.create(NetworkApiService.class);
+
+        Call<Subscription> call = apiService.insertSubscription(subscription.getNetworkId(), subscription);
+        call.enqueue(new Callback<Subscription>() {
+            @Override
+            public void onResponse(Call<Subscription> call, Response<Subscription> response) {
+                if (response.isSuccessful()) {
+                    // TODO : Change subscribeContext to SubscriptionContext
+                    if (subscribeContext != null) {
+                        subscribeContext.onSubscribeSuccessful(response.body());
+                    }
+                } else {
+                    if (subscribeContext != null) {
+                        subscribeContext.onSubscribeFailure();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Subscription> call, Throwable t) {
+                if (subscribeContext != null) {
+                    subscribeContext.onSubscribeFailure();
+                }
+            }
+        });
+    }
+
+    public void acceptSubscription(Subscription subscription) {
+        NetworkApiService apiService = retrofit.create(NetworkApiService.class);
+
+        Call<Subscription> call = apiService.updateSubscription(subscription.getNetworkId(), subscription.getId(), subscription);
+        call.enqueue(new Callback<Subscription>() {
+            @Override
+            public void onResponse(Call<Subscription> call, Response<Subscription> response) {
+                if (response.isSuccessful()) {
+                    if (acceptSubscriptionContext != null) {
+                        acceptSubscriptionContext.onAcceptSubscriptionSuccessful(response.body());
+                    }
+                } else {
+                    if (acceptSubscriptionContext != null) {
+                        acceptSubscriptionContext.onAcceptSubscriptionError();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Subscription> call, Throwable t) {
+                if (acceptSubscriptionContext != null) {
+                    acceptSubscriptionContext.onAcceptSubscriptionError();
+                }
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.smart.smartcity.fragment;
 
 import android.graphics.Bitmap;
+import android.opengl.Visibility;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ import com.smart.smartcity.activity.MainActivity;
 import com.smart.smartcity.adapters.NetworkListAdapter;
 import com.smart.smartcity.adapters.PublicationListAdapter;
 import com.smart.smartcity.context.IDownloadImageContext;
+import com.smart.smartcity.context.IMainFragmentContext;
 import com.smart.smartcity.context.IPublicationCreationContext;
 import com.smart.smartcity.context.IPublicationListContext;
 import com.smart.smartcity.dao.NetworkDAO;
@@ -60,6 +62,7 @@ public class NetworkDetailsFragment extends Fragment implements View.OnClickList
     private List<Publication> publications = new ArrayList<>();
     private PublicationDAO publicationDAO;
     private TextView publicationCreationStatus;
+    private Button networkAdministrationButton;
 
     // Publication form
     private TextInputEditText newPublicationContent;
@@ -106,10 +109,16 @@ public class NetworkDetailsFragment extends Fragment implements View.OnClickList
         newPublicationContent = view.findViewById(R.id.new_publication_content);
         newPublicationPublishButton = view.findViewById(R.id.new_publication_publish_btn);
         publicationCreationStatus = view.findViewById(R.id.publication_creation_status);
+        networkAdministrationButton = view.findViewById(R.id.admin_network_button);
 
         // Fills network metadata
         networkName.setText(network.getName());
         networkDescription.setText(network.getDescription());
+
+        if (network.getAuthorId() == user.getId()) {
+            networkAdministrationButton.setVisibility(View.VISIBLE);
+            networkAdministrationButton.setOnClickListener(this);
+        }
 
         // Requests network image
         new DownloadImageTask(this, network.getId()).execute(network.getImageUrl());
@@ -147,6 +156,8 @@ public class NetworkDetailsFragment extends Fragment implements View.OnClickList
             Publication publication = new Publication(network.getId(), user.getId(), date, content);
             publicationDAO.setPublicationCreationContext(this);
             publicationDAO.insertPublication(publication);
+        } else if (v.getId() == R.id.admin_network_button) {
+            ((IMainFragmentContext) getActivity()).showNetworkAdministrationFragment(network);
         }
     }
 
