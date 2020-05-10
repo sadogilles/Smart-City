@@ -153,7 +153,7 @@ public class WeatherFragment extends Fragment {
         ((TextView)(v.findViewById(R.id.temperature))).setText(temperature);
         ((TextView)(v.findViewById(R.id.humidity))).setText(humidity);
         ((TextView)(v.findViewById(R.id.town_name))).setText(userTown);
-        ((TextView)(v.findViewById(R.id.country))).setText(country);
+        ((TextView)(v.findViewById(R.id.country))).append(country);
         ((TextView)(v.findViewById(R.id.temperature_description))).setText(description);
         ((TextView)(v.findViewById(R.id.date))).setText((new Date()).toString());
 
