@@ -34,8 +34,6 @@ public class NetworkAdministrationFragment extends Fragment implements View.OnCl
     private Button validateButton;
     private ListView subscriptionListView;
     private SubscriptionListAdapter subscriptionListAdapter;
-    private List<Integer> acceptList = new ArrayList<>();
-    private List<Integer> rejectList = new ArrayList<>();
 
     public NetworkAdministrationFragment() {
         // Required empty public constructor

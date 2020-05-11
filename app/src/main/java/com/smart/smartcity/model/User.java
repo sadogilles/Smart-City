@@ -56,7 +56,7 @@ public class User implements Parcelable, Cloneable {
     @SerializedName("services")
     private ArrayList<Integer> services = new ArrayList<>();
 
-    public User(String firstName, String lastName, String email, String password, String dateOfBirth, String gender, String address, String town) {
+    public User(String firstName, String lastName, String email, String password, String dateOfBirth, String gender, String town, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

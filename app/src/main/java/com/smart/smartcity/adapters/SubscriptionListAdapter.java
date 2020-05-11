@@ -13,6 +13,7 @@ import com.google.android.material.textview.MaterialTextView;
 import com.smart.smartcity.R;
 import com.smart.smartcity.context.IAcceptSubscriptionContext;
 import com.smart.smartcity.context.IMainFragmentContext;
+import com.smart.smartcity.context.IRejectSubscriptionContext;
 import com.smart.smartcity.dao.NetworkDAO;
 import com.smart.smartcity.model.Network;
 import com.smart.smartcity.model.Subscription;
@@ -21,7 +22,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SubscriptionListAdapter extends ArrayAdapter<Subscription> implements View.OnClickListener, IAcceptSubscriptionContext {
+public class SubscriptionListAdapter extends ArrayAdapter<Subscription> implements View.OnClickListener, IAcceptSubscriptionContext, IRejectSubscriptionContext {
     private LayoutInflater inflater;
     private Button buttonPressed = null;
 
@@ -68,23 +69,22 @@ public class SubscriptionListAdapter extends ArrayAdapter<Subscription> implemen
             return;
         }
 
+        NetworkDAO dao = new NetworkDAO();
         if (v.getId() == R.id.subscription_accept_button) {
             buttonPressed = (Button) v;
             v.setEnabled(false);
 
             Subscription subscription = getItem((Integer) v.getTag());
-            int id = subscription.getId();
-
-            NetworkDAO dao = new NetworkDAO();
             dao.setAcceptSubscriptionContext(this);
             subscription.setState("accepted");
             dao.acceptSubscription(subscription);
         } else if (v.getId() == R.id.subscription_reject_button) {
+            buttonPressed = (Button) v;
             v.setEnabled(false);
 
             Subscription subscription = getItem((Integer) v.getTag());
-            int id = subscription.getId();
-
+            dao.setRejectSubscriptionContext(this);
+            dao.rejectSubscription(subscription);
         }
     }
 
@@ -100,6 +100,21 @@ public class SubscriptionListAdapter extends ArrayAdapter<Subscription> implemen
 
     @Override
     public void onAcceptSubscriptionError() {
+        buttonPressed.setEnabled(true);
+        buttonPressed = null;
+    }
+
+    @Override
+    public void onRejectSubscriptionSuccessFull() {
+        int position = (Integer) buttonPressed.getTag();
+        remove(getItem(position));
+        notifyDataSetChanged();
+
+        buttonPressed = null;
+    }
+
+    @Override
+    public void onRejectSubscriptionFailure() {
         buttonPressed.setEnabled(true);
         buttonPressed = null;
     }

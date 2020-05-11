@@ -11,6 +11,7 @@ import com.smart.smartcity.context.IAuthenticationContext;
 import com.smart.smartcity.context.INetworkCreationContext;
 import com.smart.smartcity.context.INetworkListContext;
 import com.smart.smartcity.context.IProfileUpdateContext;
+import com.smart.smartcity.context.IRejectSubscriptionContext;
 import com.smart.smartcity.context.ISubscribeContext;
 import com.smart.smartcity.fragment.NetworkAvailableFragment;
 import com.smart.smartcity.fragment.NewsFragment;
@@ -28,6 +29,7 @@ import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,6 +49,7 @@ public class NetworkDAO {
     private IAcceptSubscriptionContext acceptSubscriptionContext;
 
     private ISubscribeContext subscribeContext;
+    private IRejectSubscriptionContext rejectSubscriptionContext;
 
     public NetworkDAO() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -75,6 +78,10 @@ public class NetworkDAO {
 
     public void setAcceptSubscriptionContext(IAcceptSubscriptionContext acceptSubscriptionContext) {
         this.acceptSubscriptionContext = acceptSubscriptionContext;
+    }
+
+    public void setRejectSubscriptionContext(IRejectSubscriptionContext rejectSubscriptionContext) {
+        this.rejectSubscriptionContext = rejectSubscriptionContext;
     }
 
     public void setSubscribeContext(ISubscribeContext subscribeContext) {
@@ -188,6 +195,33 @@ public class NetworkDAO {
             public void onFailure(Call<Subscription> call, Throwable t) {
                 if (acceptSubscriptionContext != null) {
                     acceptSubscriptionContext.onAcceptSubscriptionError();
+                }
+            }
+        });
+    }
+
+    public void rejectSubscription (Subscription subscription){
+        NetworkApiService apiService = retrofit.create(NetworkApiService.class);
+
+        Call<ResponseBody> call = apiService.deleteSubscription(subscription.getNetworkId(), subscription.getId());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    if (rejectSubscriptionContext != null) {
+                        rejectSubscriptionContext.onRejectSubscriptionSuccessFull();
+                    }
+                } else {
+                    if (rejectSubscriptionContext != null) {
+                        rejectSubscriptionContext.onRejectSubscriptionFailure();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                if (rejectSubscriptionContext != null) {
+                    rejectSubscriptionContext.onRejectSubscriptionFailure();
                 }
             }
         });
