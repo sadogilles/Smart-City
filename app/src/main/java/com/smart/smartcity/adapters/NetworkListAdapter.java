@@ -72,12 +72,15 @@ public class NetworkListAdapter extends ArrayAdapter<Network> implements View.On
             viewHolder.networkImage.setImageBitmap(network.getImageBitmap());
         }
 
+        if (! network.isPrivateAccess()) {
+            // viewHolder.lockImage.setVisibility(View.INVISIBLE);
+        }
+
         boolean pending = false;
         boolean accepted = false;
 
         for (Subscription subscription : network.getSubscriptions()) {
             if (subscription.getUserId() == user.getId()) {
-                System.out.println("sub : " + subscription.getId() + " = " + subscription.getState());
                 if (subscription.getState().equals("pending")) {
                     pending = true;
                 } else if (subscription.getState().equals("accepted")) {
@@ -108,7 +111,9 @@ public class NetworkListAdapter extends ArrayAdapter<Network> implements View.On
         if (v.getId() == R.id.network_name_description_layout) {
             Network network = getItem((Integer) v.getTag());
 
-            mainFragmentContext.showNetworkDetailsFragment(network);
+            if (! network.isPrivateAccess()) {
+                mainFragmentContext.showNetworkDetailsFragment(network);
+            }
         } else if (v.getId() == R.id.network_subscribe_button) {
             Network network = getItem((Integer) v.getTag());
             NetworkDAO dao = new NetworkDAO();
@@ -138,11 +143,12 @@ public class NetworkListAdapter extends ArrayAdapter<Network> implements View.On
     }
 
     public class ViewHolder {
-        private LinearLayout nameDescriptionLayout;
+        private final LinearLayout nameDescriptionLayout;
         private final MaterialTextView networkName;
         private final MaterialTextView networkDescription;
         private final CircleImageView networkImage;
         private final Button subscribeButton;
+        private final ImageView lockImage;
 
         public ViewHolder(View view) {
             nameDescriptionLayout = view.findViewById(R.id.network_name_description_layout);
@@ -150,6 +156,7 @@ public class NetworkListAdapter extends ArrayAdapter<Network> implements View.On
             networkDescription = view.findViewById(R.id.network_item_description);
             networkImage = view.findViewById(R.id.network_item_image);
             subscribeButton = view.findViewById(R.id.network_subscribe_button);
+            lockImage = view.findViewById(R.id.network_lock_image);
         }
     }
 }
