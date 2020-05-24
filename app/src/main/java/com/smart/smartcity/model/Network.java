@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.smart.smartcity.util.SubscriptionState;
 
 import java.util.List;
 
@@ -157,5 +158,21 @@ public class Network implements Parcelable {
         dest.writeString(imageUrl);
         dest.writeString(localImageUri);
         dest.writeParcelable(imageBitmap, flags);
+    }
+
+    public SubscriptionState subscription(int userId) {
+        SubscriptionState state = SubscriptionState.NO_SUBSCRIPTION;
+
+        for (Subscription subscription : getSubscriptions()) {
+            if (subscription.getUserId() == userId) {
+                if (subscription.getState().equals("pending")) {
+                    state = SubscriptionState.PENDING;
+                } else if (subscription.getState().equals("accepted")) {
+                    state = SubscriptionState.ACCEPTED;
+                }
+            }
+        }
+
+        return state;
     }
 }

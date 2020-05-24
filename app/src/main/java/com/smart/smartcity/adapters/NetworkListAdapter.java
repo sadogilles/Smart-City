@@ -20,6 +20,7 @@ import com.smart.smartcity.model.Network;
 import com.smart.smartcity.model.Service;
 import com.smart.smartcity.model.Subscription;
 import com.smart.smartcity.model.User;
+import com.smart.smartcity.util.SubscriptionState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,27 +73,22 @@ public class NetworkListAdapter extends ArrayAdapter<Network> implements View.On
             viewHolder.networkImage.setImageBitmap(network.getImageBitmap());
         }
 
-        if (! network.isPrivateAccess()) {
-            // viewHolder.lockImage.setVisibility(View.INVISIBLE);
+        if (network.isPrivateAccess()) {
+            viewHolder.lockImage.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.lockImage.setVisibility(View.INVISIBLE);
         }
 
         boolean pending = false;
         boolean accepted = false;
 
-        for (Subscription subscription : network.getSubscriptions()) {
-            if (subscription.getUserId() == user.getId()) {
-                if (subscription.getState().equals("pending")) {
-                    pending = true;
-                } else if (subscription.getState().equals("accepted")) {
-                    accepted = true;
-                }
-            }
-        }
+        SubscriptionState state = network.subscription(user.getId());
 
-        if (pending) {
+        if (state == SubscriptionState.PENDING) {
             viewHolder.subscribeButton.setText("Pending ...");
             viewHolder.subscribeButton.setEnabled(false);
-        } else if (accepted || network.getAuthorId() == user.getId()) {
+            viewHolder.subscribeButton.setVisibility(View.VISIBLE);
+        } else if (state == SubscriptionState.ACCEPTED || network.getAuthorId() == user.getId()) {
             viewHolder.subscribeButton.setVisibility(View.INVISIBLE);
         }
 
@@ -111,7 +107,9 @@ public class NetworkListAdapter extends ArrayAdapter<Network> implements View.On
         if (v.getId() == R.id.network_name_description_layout) {
             Network network = getItem((Integer) v.getTag());
 
-            if (! network.isPrivateAccess()) {
+            SubscriptionState state = network.subscription(user.getId());
+
+            if (! network.isPrivateAccess() || state == SubscriptionState.ACCEPTED) {
                 mainFragmentContext.showNetworkDetailsFragment(network);
             }
         } else if (v.getId() == R.id.network_subscribe_button) {
