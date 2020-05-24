@@ -145,6 +145,29 @@ public class NetworkDAO {
         });
     }
 
+    public void findSubscribedNetwork(User user) {
+        UserApiService apiService = retrofit.create(UserApiService.class);
+
+        Call<List<Network>> call = apiService.findSubscribedNetworks(user.getId());
+        call.enqueue(new Callback<List<Network>>() {
+            @Override
+            public void onResponse(Call<List<Network>> call, Response<List<Network>> response) {
+                if (response.isSuccessful()) {
+                    networkListContext.onGetNetworksSuccessful(response.body());
+                } else {
+                    networkListContext.onGetNetworksFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Network>> call, Throwable t) {
+                Log.e("network", "Error while sending request to authentication API");
+
+                networkListContext.onGetNetworksFailure();
+            }
+        });
+    }
+
     public void insertSubscription(Subscription subscription) {
         NetworkApiService apiService = retrofit.create(NetworkApiService.class);
 

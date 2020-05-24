@@ -34,6 +34,10 @@ public class Network implements Parcelable {
     @SerializedName("subscriptions")
     private List<Subscription> subscriptions;
 
+    @Expose
+    @SerializedName("private")
+    private boolean privateAccess;
+
     private String localImageUri;
 
     private Bitmap imageBitmap;
@@ -129,6 +133,14 @@ public class Network implements Parcelable {
 
     public void setSubscriptions(List<Subscription> subscriptions) {
         this.subscriptions = subscriptions;
+    }
+
+    public boolean isPrivateAccess() {
+        return privateAccess;
+    }
+
+    public void setPrivateAccess(boolean privateAccess) {
+        this.privateAccess = privateAccess;
     }
 
     @Override

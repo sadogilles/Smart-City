@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.NetworkSubscriptionFragment">
+    tools:context=".fragment.NetworkSubscriptionFragment"
+    android:orientation="vertical">
     <com.google.android.material.textview.MaterialTextView
         android:paddingTop="50dp"
         android:layout_width="match_parent"
@@ -12,9 +13,17 @@
         android:textSize="30dp"
         android:gravity="center"
         />
- <ListView
+
+    <TextView
+        android:id="@+id/network_subscribed_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="" />
+
+    <ListView
      android:id="@+id/subscribed_networks_list_view"
      android:layout_width="match_parent"
-     android:layout_height="wrap_content"/>
+     android:layout_height="match_parent"/>
 
 </LinearLayout>
