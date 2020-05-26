@@ -7,6 +7,7 @@ import com.smart.smartcity.context.trade.IOfferListContext;
 import com.smart.smartcity.context.trade.ITradeDetailsContext;
 import com.smart.smartcity.model.Offer;
 import com.smart.smartcity.model.Trade;
+import com.smart.smartcity.model.User;
 
 import java.util.List;
 
@@ -37,6 +38,30 @@ public class OfferDAO {
         OfferApiService apiService = retrofit.create(OfferApiService.class);
 
         Call<List<Offer>> call = apiService.findOffersByTrade(trade.getId());
+        call.enqueue(new Callback<List<Offer>>() {
+            @Override
+            public void onResponse(Call<List<Offer>> call, Response<List<Offer>> response) {
+                if (response.isSuccessful()) {
+                    offerListContext.onGetOffersSuccessful(response.body());
+                } else {
+                    offerListContext.onGetOffersFailure();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Offer>> call, Throwable t) {
+                Log.e("offers", "Error while sending request to offers API");
+                Log.e("offers", t.getMessage());
+
+                offerListContext.onGetOffersFailure();
+            }
+        });
+    }
+
+    public void findOffersByUser(User user) {
+        OfferApiService apiService = retrofit.create(OfferApiService.class);
+
+        Call<List<Offer>> call = apiService.findOffersByUser(user.getId());
         call.enqueue(new Callback<List<Offer>>() {
             @Override
             public void onResponse(Call<List<Offer>> call, Response<List<Offer>> response) {
