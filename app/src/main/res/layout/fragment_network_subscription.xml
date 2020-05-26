@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.NetworkSubscriptionFragment"
+    tools:context=".fragment.networks.NetworkSubscriptionFragment"
     android:orientation="vertical">
     <com.google.android.material.textview.MaterialTextView
         android:paddingTop="50dp"

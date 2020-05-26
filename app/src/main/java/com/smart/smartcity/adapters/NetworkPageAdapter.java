@@ -6,16 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.smart.smartcity.fragment.NetworkAvailableFragment;
-import com.smart.smartcity.fragment.NetworkSubscriptionFragment;
-import com.smart.smartcity.model.User;
+import com.smart.smartcity.fragment.networks.NetworkAvailableFragment;
+import com.smart.smartcity.fragment.networks.NetworkSubscriptionFragment;
 
 public class NetworkPageAdapter extends FragmentPagerAdapter {
-
-    private User user;
-    public NetworkPageAdapter(@NonNull FragmentManager fm,User user) {
+    public NetworkPageAdapter(@NonNull FragmentManager fm) {
         super(fm);
-        this.user = user;
     }
 
     @Override

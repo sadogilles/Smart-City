@@ -3,10 +3,8 @@ package com.smart.smartcity.dao;
 import android.util.Log;
 
 import com.smart.smartcity.apiservices.InterestApiService;
-import com.smart.smartcity.apiservices.ServiceApiService;
-import com.smart.smartcity.context.IInterestListContext;
+import com.smart.smartcity.context.settings.IInterestListContext;
 import com.smart.smartcity.model.Interest;
-import com.smart.smartcity.model.Service;
 
 import java.util.List;
 

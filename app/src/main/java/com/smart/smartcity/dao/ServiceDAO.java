@@ -3,8 +3,7 @@ package com.smart.smartcity.dao;
 import android.util.Log;
 
 import com.smart.smartcity.apiservices.ServiceApiService;
-import com.smart.smartcity.context.IDownloadImageContext;
-import com.smart.smartcity.context.IServiceListContext;
+import com.smart.smartcity.context.services.IServiceListContext;
 import com.smart.smartcity.model.Service;
 
 import java.util.List;

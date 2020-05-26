@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.CreateNetworkSettingsFragment"
+    tools:context=".fragment.settings.CreateNetworkSettingsFragment"
     android:orientation="vertical"
 
     >
@@ -70,6 +70,28 @@
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/access_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/private_access_radio"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Private" />
+
+            <RadioButton
+                android:id="@+id/public_access_radio"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Public" />
+        </RadioGroup>
 
         <Button
 

@@ -43,11 +43,12 @@ public class Network implements Parcelable {
 
     private Bitmap imageBitmap;
 
-    public Network(int authorId, String name, String description, String localImageUri) {
+    public Network(int authorId, String name, String description, String localImageUri, boolean privateAccess) {
         this.authorId = authorId;
         this.name = name;
         this.description = description;
         this.localImageUri = localImageUri;
+        this.privateAccess = privateAccess;
     }
 
     protected Network(Parcel in) {

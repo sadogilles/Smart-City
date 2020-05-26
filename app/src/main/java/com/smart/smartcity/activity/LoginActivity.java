@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.smart.smartcity.R;
-import com.smart.smartcity.context.IAuthenticationContext;
+import com.smart.smartcity.context.authentication.IAuthenticationContext;
 import com.smart.smartcity.dao.UserDAO;
 import com.smart.smartcity.model.User;
 

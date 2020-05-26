@@ -6,21 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.material.textview.MaterialTextView;
 import com.smart.smartcity.R;
-import com.smart.smartcity.context.IAcceptSubscriptionContext;
-import com.smart.smartcity.context.IMainFragmentContext;
-import com.smart.smartcity.context.IRejectSubscriptionContext;
+import com.smart.smartcity.context.network.IAcceptSubscriptionContext;
+import com.smart.smartcity.context.network.IRejectSubscriptionContext;
 import com.smart.smartcity.dao.NetworkDAO;
-import com.smart.smartcity.model.Network;
 import com.smart.smartcity.model.Subscription;
 
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SubscriptionListAdapter extends ArrayAdapter<Subscription> implements View.OnClickListener, IAcceptSubscriptionContext, IRejectSubscriptionContext {
     private LayoutInflater inflater;

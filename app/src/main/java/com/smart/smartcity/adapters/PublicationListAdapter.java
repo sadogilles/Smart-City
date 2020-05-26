@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.smart.smartcity.R;
-import com.smart.smartcity.context.IMainFragmentContext;
-import com.smart.smartcity.model.Network;
 import com.smart.smartcity.model.Publication;
 
 import java.util.List;

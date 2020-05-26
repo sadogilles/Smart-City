@@ -11,7 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.smart.smartcity.R;
-import com.smart.smartcity.context.IRegistrationContext;
+import com.smart.smartcity.context.authentication.IRegistrationContext;
 import com.smart.smartcity.dao.UserDAO;
 import com.smart.smartcity.model.User;
 

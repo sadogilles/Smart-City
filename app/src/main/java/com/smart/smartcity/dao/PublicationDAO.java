@@ -5,10 +5,9 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.smart.smartcity.apiservices.NetworkApiService;
-import com.smart.smartcity.context.IPublicationCreationContext;
-import com.smart.smartcity.context.IPublicationListContext;
+import com.smart.smartcity.context.network.IPublicationCreationContext;
+import com.smart.smartcity.context.network.IPublicationListContext;
 import com.smart.smartcity.model.Publication;
-import com.smart.smartcity.model.User;
 
 import java.util.List;
 

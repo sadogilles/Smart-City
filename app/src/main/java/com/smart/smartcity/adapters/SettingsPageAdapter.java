@@ -6,12 +6,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.smart.smartcity.fragment.AlarmSettingsFragment;
-import com.smart.smartcity.fragment.CreateNetworkSettingsFragment;
-import com.smart.smartcity.fragment.InterestSettingsFragment;
-import com.smart.smartcity.fragment.ProfileSettingsFragment;
-import com.smart.smartcity.fragment.ServiceSettingsFragment;
-import com.smart.smartcity.model.User;
+import com.smart.smartcity.fragment.settings.AlarmSettingsFragment;
+import com.smart.smartcity.fragment.settings.CreateNetworkSettingsFragment;
+import com.smart.smartcity.fragment.settings.InterestSettingsFragment;
+import com.smart.smartcity.fragment.settings.ProfileSettingsFragment;
+import com.smart.smartcity.fragment.settings.ServiceSettingsFragment;
 
 public class SettingsPageAdapter extends FragmentPagerAdapter {
     public SettingsPageAdapter(@NonNull FragmentManager fm) {

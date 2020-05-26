@@ -8,21 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
-import android.widget.TextView;
 
 import com.google.android.material.textview.MaterialTextView;
 import com.smart.smartcity.R;
-import com.smart.smartcity.context.IMainFragmentContext;
-import com.smart.smartcity.context.ISubscribeContext;
+import com.smart.smartcity.context.global.IMainFragmentContext;
+import com.smart.smartcity.context.network.ISubscribeContext;
 import com.smart.smartcity.dao.NetworkDAO;
 import com.smart.smartcity.model.Network;
-import com.smart.smartcity.model.Service;
 import com.smart.smartcity.model.Subscription;
 import com.smart.smartcity.model.User;
 import com.smart.smartcity.util.SubscriptionState;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;

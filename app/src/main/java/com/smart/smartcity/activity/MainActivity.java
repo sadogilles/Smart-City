@@ -3,12 +3,8 @@ package com.smart.smartcity.activity;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -16,38 +12,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
 import com.smart.smartcity.R;
-import com.smart.smartcity.adapters.ServiceAdapter;
-import com.smart.smartcity.context.IMainFragmentContext;
-import com.smart.smartcity.context.IServiceListContext;
-import com.smart.smartcity.dao.ServiceDAO;
-import com.smart.smartcity.fragment.BottomMenuFragment;
-import com.smart.smartcity.fragment.HomeFragment;
-import com.smart.smartcity.fragment.InterestSettingsFragment;
-import com.smart.smartcity.fragment.NetworkAdministrationFragment;
-import com.smart.smartcity.fragment.NetworkDetailsFragment;
-import com.smart.smartcity.fragment.NetworkFragment;
-import com.smart.smartcity.fragment.NewsFragment;
-import com.smart.smartcity.fragment.ProfileSettingsFragment;
-import com.smart.smartcity.adapters.SettingsPageAdapter;
-import com.smart.smartcity.fragment.SettingsFragment;
-import com.smart.smartcity.fragment.TradeFragment;
-import com.smart.smartcity.fragment.TrafficFragment;
-import com.smart.smartcity.fragment.WeatherFragment;
+import com.smart.smartcity.context.global.IMainFragmentContext;
+import com.smart.smartcity.fragment.global.BottomMenuFragment;
+import com.smart.smartcity.fragment.networks.NetworkAdministrationFragment;
+import com.smart.smartcity.fragment.networks.NetworkDetailsFragment;
+import com.smart.smartcity.fragment.networks.NetworkFragment;
+import com.smart.smartcity.fragment.services.NewsFragment;
+import com.smart.smartcity.fragment.settings.SettingsFragment;
+import com.smart.smartcity.fragment.trades.TradeDetailsFragment;
+import com.smart.smartcity.fragment.trades.TradeFragment;
+import com.smart.smartcity.fragment.services.TrafficFragment;
+import com.smart.smartcity.fragment.services.WeatherFragment;
 import com.smart.smartcity.model.Network;
-import com.smart.smartcity.model.Service;
 import com.smart.smartcity.model.User;
 import com.smart.smartcity.util.CurrentFragment;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 import static com.smart.smartcity.util.CurrentFragment.NEWS;
 
@@ -60,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     //fragments
     private NetworkFragment networkFragment = null;
     private NewsFragment newsFragment = null;
-    private HomeFragment homeFragment = null;
     private TradeFragment tradeFragment = null;
     private SettingsFragment settingsFragment = null;
     private CurrentFragment currentFragment = CurrentFragment.NONE;
@@ -226,6 +207,15 @@ public class MainActivity extends AppCompatActivity implements BottomMenuFragmen
     public void showNetworkAdministrationFragment(Network network) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         NetworkAdministrationFragment fragment = NetworkAdministrationFragment.newInstance(network);
+        transaction.replace(R.id.main_fragment, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void showTradeDetailsFragment(int tradeId) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        TradeDetailsFragment fragment = TradeDetailsFragment.newInstance(tradeId);
         transaction.replace(R.id.main_fragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

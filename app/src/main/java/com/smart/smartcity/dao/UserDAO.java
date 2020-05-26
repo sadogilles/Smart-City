@@ -3,10 +3,10 @@ package com.smart.smartcity.dao;
 import android.util.Log;
 
 import com.smart.smartcity.apiservices.UserApiService;
-import com.smart.smartcity.context.IAuthenticationContext;
+import com.smart.smartcity.context.authentication.IAuthenticationContext;
 import com.smart.smartcity.apiservices.AuthenticationApiService;
-import com.smart.smartcity.context.IProfileUpdateContext;
-import com.smart.smartcity.context.IRegistrationContext;
+import com.smart.smartcity.context.settings.IProfileUpdateContext;
+import com.smart.smartcity.context.authentication.IRegistrationContext;
 import com.smart.smartcity.model.User;
 import com.smart.smartcity.protocol.AuthenticationData;
 

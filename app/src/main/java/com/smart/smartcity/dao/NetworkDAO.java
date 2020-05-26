@@ -2,20 +2,13 @@ package com.smart.smartcity.dao;
 
 import android.util.Log;
 
-import com.smart.smartcity.activity.LoginActivity;
-import com.smart.smartcity.apiservices.InterestApiService;
 import com.smart.smartcity.apiservices.NetworkApiService;
 import com.smart.smartcity.apiservices.UserApiService;
-import com.smart.smartcity.context.IAcceptSubscriptionContext;
-import com.smart.smartcity.context.IAuthenticationContext;
-import com.smart.smartcity.context.INetworkCreationContext;
-import com.smart.smartcity.context.INetworkListContext;
-import com.smart.smartcity.context.IProfileUpdateContext;
-import com.smart.smartcity.context.IRejectSubscriptionContext;
-import com.smart.smartcity.context.ISubscribeContext;
-import com.smart.smartcity.fragment.NetworkAvailableFragment;
-import com.smart.smartcity.fragment.NewsFragment;
-import com.smart.smartcity.model.Interest;
+import com.smart.smartcity.context.network.IAcceptSubscriptionContext;
+import com.smart.smartcity.context.settings.INetworkCreationContext;
+import com.smart.smartcity.context.network.INetworkListContext;
+import com.smart.smartcity.context.network.IRejectSubscriptionContext;
+import com.smart.smartcity.context.network.ISubscribeContext;
 import com.smart.smartcity.model.Network;
 import com.smart.smartcity.model.Subscription;
 import com.smart.smartcity.model.User;
@@ -27,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -36,9 +28,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Multipart;
-import retrofit2.http.POST;
-import retrofit2.http.Part;
 
 public class NetworkDAO {
     private static final String BASE_API_URL = "https://smartcityapi20200414094628.azurewebsites.net/";
