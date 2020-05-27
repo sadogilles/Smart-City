@@ -105,7 +105,7 @@ public class NetworkListAdapter extends ArrayAdapter<Network> implements View.On
 
             SubscriptionState state = network.subscription(user.getId());
 
-            if (! network.isPrivateAccess() || state == SubscriptionState.ACCEPTED) {
+            if (network.getAuthorId() == user.getId() || ! network.isPrivateAccess() || state == SubscriptionState.ACCEPTED) {
                 mainFragmentContext.showNetworkDetailsFragment(network);
             }
         } else if (v.getId() == R.id.network_subscribe_button) {
